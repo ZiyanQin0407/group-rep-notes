@@ -1,0 +1,58 @@
+
+
+
+\chapter{The Group Algebra}
+
+\begin{defn}[Coefficient Extension]
+Let \(S\) be nonempty set, and let \(R\) be a commutative  unitary ring. The \textbf{coefficient extension} of \(S\) to \(R\) is the free \(R\)-module with basis \(S\):
+\[
+R\langle S \rangle := \left\{ \sum_{s \in S} r_s \, s \;\middle|\; r_s \in R,\; \text{and only finitely many } r_g \text{ are nonzero} \right\}.
+\]
+Addition and scalar multiplication are defined componentwise:
+\[
+\sum_{s \in S} a_s s + \sum_{s \in S} b_s s = \sum_{s \in S} (a_s + b_s) s, \qquad
+c \cdot \sum_{s \in S} a_s s = \sum_{s \in S} (c a_s) s.
+\]
+\end{defn}
+\begin{defn}
+Let \(G\) be a group and \(K\) a field. The \textbf{group algebra} \(K[G]\) is the \(K\)-vector space with basis \(\{e_g : g \in G\}\), often identified with the symbols \(\{g : g \in G\}\). Thus
+\[
+K[G] := \left\{ \sum_{g \in G} a_g \, g \;\middle|\; a_g \in K,\; \text{and only finitely many } a_g \text{ are nonzero} \right\}.
+\]
+Addition and scalar multiplication are defined componentwise:
+\[
+\sum_{g \in G} a_g g + \sum_{g \in G} b_g g = \sum_{g \in G} (a_g + b_g) g, \qquad
+c \cdot \sum_{g \in G} a_g g = \sum_{g \in G} (c a_g) g.
+\]
+Multiplication is given by the bilinear extension of the group operation:
+\[
+\left( \sum_{g \in G} a_g g \right) \left( \sum_{h \in G} b_h h \right)
+= \sum_{g,h \in G} (a_g b_h) \, gh
+= \sum_{t \in G} \left( \sum_{gh = t} a_g b_h \right) t.
+\]
+The identity element of \(K[G]\) is \(1 \cdot e\), where \(e\) is the identity of \(G\).
+\end{defn}
+
+\begin{remark}
+The finite support condition is crucial: it ensures that the convolution sum \(\sum_{gh=t} a_g b_h\) is finite for each \(t\), so multiplication is well-defined. This is exactly the distinction from formal power series, which allow infinite support.
+\end{remark}
+
+\begin{prop}
+For finite group $G$, \(K[G]\) is an associative \(K\)-algebra with identity \(e\), and \(\dim_K K[G] = |G|\).
+\end{prop}
+
+\begin{proof}
+The vector space dimension is clear since the basis has \(|G|\) elements. To verify associativity, take three basis elements \(g,h,k \in G\). We have
+\[
+(g h) k = g (h k)
+\]
+by associativity in \(G\). Extending bilinearly to arbitrary elements
+\[
+x = \sum a_g g, \quad y = \sum b_h h, \quad z = \sum c_k k,
+\]
+the coefficient of \(t \in G\) in \((xy)z\) is
+\[
+\sum_{ghk = t} a_g b_h c_k,
+\]
+which is symmetric in the grouping, hence \((xy)z = x(yz)\). The identity element is \(1 \cdot e\). 
+\end{proof}

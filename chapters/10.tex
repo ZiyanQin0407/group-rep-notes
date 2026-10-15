@@ -1,0 +1,340 @@
+
+\chapter{Representations over Characteristic -\(p\) Field}
+
+\begin{defn}
+Let \(K\) be a field of characteristic \(p > 0\). A representation of \(G\) over \(K\) is called a \textbf{modular representation}. 
+\end{defn}
+The theory of modular representations is fundamentally different from the characteristic-zero case when \(p \mid |G|\).
+
+\section{The Failure of Semisimplicity}
+
+When \(\operatorname{char} K \mid |G|\), Maschke's theorem fails: not every representation is completely reducible.
+
+\begin{exmp}
+Let \(G = C_2 = \langle s \mid s^2 = 1 \rangle\) and \(K = \mathbb{F}_2\). The representation
+\[
+s \mapsto \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}
+\]
+is not completely reducible: it has a $G$-invariant subspace $W:=\operatorname{span}\{\begin{pmatrix} 1 \\ 0 \end{pmatrix}\}$ but no $G$-invariant complement.
+\end{exmp}
+
+
+\section{Teichm\"uller Lifting}
+
+Now we introduce some tools in algebraic number theory.
+
+Let \(p\) be a prime number, and let \(\overline{\mathbb{F}}_p\) be an algebraic closure of the finite field \(\mathbb{F}_p = \mathbb{Z}/p\mathbb{Z}\). Let \(\mathcal{R}\) be the ring of all algebraic integers in \(\mathbb{C}\). By Zorn's lemma, there exists a maximal ideal \(\mathfrak{m} \subseteq \mathcal{R}\) containing \(p\mathcal{R}\).
+
+Let
+\[
+F := \mathcal{R}/\mathfrak{m}
+\]
+be the residue field. 
+
+The natural map
+\[
+* : \mathcal{R} \to F, \qquad r \mapsto r\mathfrak{m}=:r^*
+\]
+sends \(\mathcal{R}\) onto \(F\).
+
+Define
+\[
+\mathbf{U} := \{ \xi \in \mathbb{C} \mid \xi^m = 1 \text{ for some } m \ge 1 \text{ with } p \nmid m \}.
+\]
+The elements in $\mathbf{U}$ are called the \(p'\)-roots of unity. It is easy to find \(\mathbf{U} \subseteq \mathcal{R}\).
+
+
+\begin{lemma}\label{lem:Teichmuller}
+The restriction of \(*\) to \(\mathbf{U}\) is a group isomorphism
+\[
+\mathbf{U} \longrightarrow F^\times.
+\]
+In particular, \(F\) is algebraically closed and contains \(\mathbb{F}_p\) as its prime field.
+\end{lemma}
+
+\begin{proof}
+We first note that \(*|_{\mathbf{U}}\) is a group homomorphism, since it is the restriction of the ring homomorphism \(\mathcal{R} \to F\).
+
+It suffices to prove  \(*|_{\mathbf{U}}\) is a bijection, and \(F\) is algebraically closed and contains \(\mathbb{F}_p\) as its prime field.
+We divide the proof into four steps.
+
+\medskip
+\noindent\textbf{Step 1: \(\mathfrak{m} \cap \mathbb{Z} = p\mathbb{Z}\).}
+
+Clearly \(p\mathbb{Z} \subseteq \mathfrak{m} \cap \mathbb{Z}\). If \(n \in \mathfrak{m} \cap \mathbb{Z}\) and \(p \nmid n\), then there exist integers \(a, b\) such that \(ap + bn = 1\). Since \((p, n) \in \mathfrak{m}^2\), we get \(1 \in \mathfrak{m}\), contradiction. Hence \(\mathfrak{m} \cap \mathbb{Z} = p\mathbb{Z}\). Consequently, the image of \(\mathbb{Z}\) in \(F\) is \(\mathbb{Z}/p\mathbb{Z} = \mathbb{F}_p\), so \(F\) has characteristic \(p\).
+
+\medskip
+\noindent\textbf{Step 2: \(*|_{\mathbf{U}}\) is injective.}
+
+Suppose \(\xi \in \mathbf{U}\setminus\{1\}\) has order \(m\ge 2\), with \(p \nmid m\), and suppose \(\xi^* = 1\). Since
+\[
+1 + x + \cdots + x^{m-1} = \frac{x^m - 1}{x - 1} = \prod_{i=1}^{m-1} (x - \xi^i),\quad\forall x\neq1,
+\]
+evaluating at \(x = 1\) gives
+\[
+m = \lim_{x \to 1} (1 + x + \cdots + x^{m-1}) 
+  = \lim_{x \to 1} \prod_{i=1}^{m-1} (x - \xi^i) 
+  = \prod_{i=1}^{m-1} (1 - \xi^i).
+\]
+Thus \[m ^*
+  = \prod_{i=1}^{m-1} (1 - \xi^i)^* =\prod_{i=1}^{m-1} (1 - (\xi^i)^*) = \prod_{i=1}^{m-1} (1 - 1 )= 0\] , so \(m \in \mathfrak{m}\). But by Step 1, \(\mathfrak{m} \cap \mathbb{Z} = p\mathbb{Z}\), so \(p \mid m\), contradicting \(p \nmid m\). Hence \(\xi^* \neq 1\), so the restriction is injective.
+
+\medskip
+\noindent\textbf{Step 3: \(*|_{\mathbf{U}}\) is surjective.}
+
+Let \(f \in F^\times\). Choose \(r \in \mathcal{R}\) with \(r^* = f\). Since \(r\) is an algebraic integer, it satisfies a monic polynomial equation over \(\mathbb{Z}\):
+\[
+r^n + a_{n-1} r^{n-1} + \cdots + a_0 = 0, \qquad a_i \in \mathbb{Z}.
+\]
+Reducing modulo \(\mathfrak{m}\) gives
+\[
+f^n + a_{n-1}^* f^{n-1} + \cdots + a_0^* = 0,
+\]
+so \(f\) is algebraic over \(\mathbb{F}_p\). Hence \(f\) lies in a finite subfield \(\mathbb{F}_{p^d} \subseteq F\). Therefore \(f\) has finite order \(m = p^d - 1\), which is not divisible by \(p\). Thus \(f\) is a root of \(x^m - 1\) in \(F\).
+
+Now the polynomial \(x^m - 1\) has exactly \(m\) distinct roots in \(\mathbf{U}\), and by injectivity, their images in \(F\) are \(m\) distinct elements. Since a degree-\(m\) polynomial over a field has at most \(m\) roots, the images of \(\mathbf{U}\) account for all roots of \(x^m - 1\) in \(F\). Hence there exists \(\xi \in \mathbf{U}\) with \(\xi^* = f\). Thus \(*|_{\mathbf{U}}\) is surjective.
+
+\medskip
+\noindent\textbf{Step 4: \(F\) is algebraically closed.}
+
+Let \(K/F\) be an algebraic extension and take \(k \in K\). Since \(k\) is algebraic over \(F\), and \(F\) is algebraic over \(\mathbb{F}_p\), \(k\) is algebraic over \(\mathbb{F}_p\). Hence \(\mathbb{F}_p[k]\) is a finite field, so \(k\) has finite order \(m\) with \(p \nmid m\). Thus \(k^m = 1\). The polynomial \(x^m - 1\) has at most \(m\) roots in \(K\), but we already have \(m\) distinct roots in \(F\) (the images of \(\mathbf{U}\) under \(*\)). Hence \(k \in F\). Therefore \(F\) has no nontrivial algebraic extensions, so \(F\) is algebraically closed.
+\end{proof}
+
+\begin{defn}
+The \textbf{Teichm\"uller lift} is the inverse of the isomorphism \(*|_{\mathbf{U}}: \mathbf{U} \to F^\times\):
+\[
+\tau : F^\times \longrightarrow \mathbf{U}, \qquad \tau(f) := \text{the unique } \xi \in \mathbf{U} \text{ such that } \xi^* = f.
+\]
+\end{defn}
+
+\begin{thm}[Uniqueness of the Teichm\"uller Lift in \(\mathbb{C}\)]\label{thm:Teichmuller lift}
+There is exactly one group homomorphism \(\tau: F^\times \to \mathbb{C}^\times\) such that:
+\begin{enumerate}
+    \item \(\tau(f)^* = f\) for all \(f \in F^\times\);
+    \item \(\tau(f)\) is a root of unity of order prime to \(p\).
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Existence: The inverse of the isomorphism \(*|_{\mathbf{U}}: \mathbf{U} \to F^\times\) gives a map \(\tau: F^\times \to \mathbf{U} \subseteq \mathbb{C}^\times\) satisfying both conditions. It is a group homomorphism because it is the inverse of a group isomorphism.
+
+Uniqueness: Suppose \(\sigma: F^\times \to \mathbb{C}^\times\) is another map satisfying the same two conditions. Fix \(f \in F^\times\). Then \(\sigma(f)\) is a root of unity of order prime to \(p\), so \(\sigma(f) \in \mathbf{U}\). Both \(\tau(f)\) and \(\sigma(f)\) are elements of \(\mathbf{U}\) with the same image under \(*\):
+\[
+\tau(f)^* = f = \sigma(f)^*.
+\]
+Since \(*|_{\mathbf{U}}\) is injective (Lemma \ref{lem:Teichmuller}), we have \(\tau(f) = \sigma(f)\). Hence \(\sigma = \tau\).
+\end{proof}
+
+\begin{remark}
+The Teichm\"uller lift \(\tau(f)\) is the unique \(p'\)-root of unity in \(\mathbb{C}\) whose reduction modulo \(\mathfrak{m}\) is \(f\). In explicit terms, if \(f \in \mathbb{F}_{p^d}^\times \subseteq F\), then
+\[
+\tau(f) = \lim_{n \to \infty} f^{p^{dn}}
+\]
+in the \(p\)-adic sense, and this limit is a root of unity in \(\mathbb{C}\) of order dividing \(p^d - 1\).
+\end{remark}
+
+
+
+\section{Brauer Characters}
+
+
+Since the trace of an element in characteristic \(p\) loses information (e.g., \(1 + p = 1\) in characteristic \(p\)), one defines a refined invariant: Brauer character.
+
+
+\begin{defn}
+Let \(G_{p'}\) be the set of elements whose order is prime to \(p\). For a modular representation \(\rho: G \to GL(V)\) over \(K\), the \textbf{Brauer character} \(\phi_\rho\) is defined on \(G_{p'}\) by lifting eigenvalues to characteristic zero:
+\[
+\phi_\rho(g) = \sum_{i=1}^n \tilde{\lambda}_i,
+\]
+where \(\lambda_1, \ldots, \lambda_n\) are the eigenvalues of \(\rho(g)\) in the algebraic closure of \(K\), and \(\tilde{\lambda}_i = \tau(\lambda_i)\in \mathbb{C}\) is the unique lift  by Theorem \ref{thm:Teichmuller lift}.
+\end{defn}
+\begin{remark}
+Strictly speaking, a Brauer character is not a character of $G$ in the sense of Definition \ref{def:Character}, because:
+\begin{enumerate}
+    \item Its domain is \(G_{p'}\), not the whole group \(G\).
+    \item Its codomain is \(\mathbb{C}\), not the field \(K\) over which the representation is defined.
+\end{enumerate}
+However, there is a precise sense in which a Brauer character behaves like an ordinary character of $G$ ( i.e., character of representation of entire $G$):
+
+Let \(\rho: G \to \mathrm{GL}_n(K)\) be a representation over a field \(K\) of characteristic \(p\). Fix a maximal ideal \(\mathfrak{m}\) of the algebraic integer ring \(\mathcal{R} \subset \mathbb{C}\), and let \(F = \mathcal{R}/\mathfrak{m}\). By the Teichm\"uller lift \(\tau: F^\times \to \mathbb{C}^\times\), every eigenvalue \(\lambda_i \in F^\times\) of \(\rho(g)\) (for \(g \in G_{p'}\)) lifts uniquely to a complex root of unity \(\tilde{\lambda}_i = \tau(\lambda_i)\). Define\[\tilde{\rho}: G_{p'} \to \mathrm{GL}_n(\mathbb{C}),\quad g\mapsto \operatorname{diag}\{\tilde{\lambda}_1, \dots, \tilde{\lambda}_n\}\]
+Such \(\tilde{\rho}\) is not a group homomorphism on all of \(G\), but on \(G_{p'}\) it behaves like a representation: it is multiplicative on \(G_{p'}\), and its trace is exactly the Brauer character \(\phi_\rho(g)\).
+
+Therefore, the Brauer character \(\phi_\rho\) is the restriction to \(G_{p'}\) of the ordinary character of a \emph{virtual} complex representation. 
+
+In particular, Propositions \ref{prop:linenear cha},\ref{prop:add_mul cha} and \ref{prop:sym_alt cha} hold for Brauer characters by the similar proofs with \(G\) replaced by \(G_{p'}\), and Brauer characters are class functions on \(G_{p'}\).
+\end{remark}
+
+\begin{lemma}\label{tr_Bcha}
+If \(g \in G\) has \(p'\)-component \(g_{p'}\) and \(\rho\) is a representation over \(K\), then the trace \(\operatorname{tr}(\rho(g))\) equals the reduction modulo \(\mathfrak{m}\) of \(\phi_\rho(g_{p'})\).
+\end{lemma}
+
+\begin{proof}
+Write \(g = g_p g_{p'}\) with \(g_p\) a \(p\)-element and \(g_{p'}\) a \(p'\)-element. Since \(K\) has characteristic \(p\), the eigenvalues of \(\rho(g_p)\) are all 1. Hence the eigenvalues of \(\rho(g)\) are the same as those of \(\rho(g_{p'})\), and the result follows.
+\end{proof}
+
+
+\begin{defn}
+Let \(K\) be an algebraically closed field of characteristic \(p\). Let
+\[
+\operatorname{IBr}(G) := \{ \phi \mid \phi \text{ is the Brauer character of an irreducible } K[G]\text{-module} \}.
+\]
+\end{defn}
+
+\begin{thm}[Brauer]\label{thm:Brauer basis}
+If \(K\) is algebraically closed, then the set \(\operatorname{IBr}(G)\) is a basis of the \(K\)-vector space of class functions on \(G_{p'}\).
+\end{thm}
+
+\begin{proof}
+We prove linear independence and spanning.
+
+\medskip
+\noindent\textbf{Linear independence.}
+
+For each \(\phi \in \operatorname{IBr}(G)\), let \((\rho_\phi, V_\phi)\) be an irreducible \(K[G]\)-module affording \(\phi\). Suppose
+\[
+\sum_{\phi \in \operatorname{IBr}(G)} c_\phi \phi = 0 \quad \text{on } G_{p'}, \qquad c_\phi \in K.
+\]
+We show all \(c_\phi = 0\).
+
+Choose a maximal ideal \(\mathfrak{m} \subset \mathcal{R}\) (the algebraic integer ring) and, assume \(c_\phi \in \mathcal{R}\) (otherwise clear the denominators). Reducing modulo \(\mathfrak{m}\) gives
+\[
+\sum_{\phi \in \operatorname{IBr}(G)} \overline{c_\phi} \, \overline{\phi} = 0 \quad \text{on } G_{p'},
+\]
+where \(\overline{c_\phi} \in K\) and \(\overline{\phi}(g) = \operatorname{tr}(\rho_\phi(g))\) for \(g \in G_{p'}\).
+
+By Lemma \ref{tr_Bcha}, 
+\[
+\sum_{\phi \in \operatorname{IBr}(G)} \overline{c_\phi} \, \operatorname{tr}(\rho_\phi(g)) = 0, \quad \forall g \in G.
+\]
+By linearity, for every \(t =\sum_{g\in G}a_gg\in K[G]\),
+\[
+\sum_{\phi \in \operatorname{IBr}(G)} \overline{c_\phi} \, \operatorname{tr}(\sum_{g\in G}a_g\rho_\phi(g)) = 0. \tag{1}
+\]
+Define\[t|_{V_\phi}:=\sum_{g\in G}a_g\rho_\phi(g)\]
+By Theorem \ref{Artin--Wedderburn, algebraically closed case},
+\[
+K[G] \cong \bigoplus_{\phi \in \operatorname{IBr}(G)} M_{d_\phi}(K), \quad d_\phi = \dim V_\phi.
+\]
+For each \(\phi_0 \in \operatorname{IBr}(G)\), let \(t_{\phi_0} \in K[G]\) correspond to the matrix with a single 1 in the top-left corner of the \(M_{d_{\phi_0}}(K)\)-block and zeros elsewhere. Then
+\[
+\operatorname{tr}(t_{\phi_0}|_{V_{\phi_0}}) = 1, \qquad \operatorname{tr}(t_{\phi_0}|_{V_\psi}) = 0 \quad (\psi \neq \phi_0).
+\]
+Substituting \(t = t_{\phi_0}\) into (1) gives \(\overline{c_{\phi_0}} = 0\). Since this holds for every maximal ideal \(\mathfrak{m}\), all \(c_\phi = 0\). Thus \(\operatorname{IBr}(G)\) is linearly independent.
+
+\medskip
+\noindent\textbf{Spanning.}
+
+Let \(f\) be any class function on \(G_{p'}\). Extend \(f\) to a class function \(\tilde{f}\) on all of \(G\). 
+
+(e.g., Take $\tilde{f}(g) :=
+\begin{cases}
+f(g), & g \in G_{p'},\\
+0, &\text{otherwise}.
+\end{cases}$)
+
+Since ordinary irreducible characters form a basis of the class functions on \(G\), we have
+\[
+\tilde{f} = \sum_{\chi \in \operatorname{Irr}(G)} a_\chi \chi, \qquad a_\chi \in K.
+\]
+Restricting to \(G_{p'}\) gives
+\[
+f = \sum_{\chi \in \operatorname{Irr}(G)} a_\chi \chi|_{G_{p'}}. \tag{2}
+\]
+
+We now prove that each \(\chi|_{G_{p'}}\) is a Brauer character of \(G\). Let \(\chi \in \operatorname{Irr}(G)\). By Serre's Lemma (proved in the Appendix B), \(\chi\) is afforded by a representation \(\rho: G \to \mathrm{GL}_n(S)\), where \(S\) be the localization of \(\mathcal{R}\) at \(\mathfrak{m}\), i.e.,
+\[
+S = \left\{ \frac{r}{s} \;\middle|\; r \in \mathcal{R},\; s \in \mathcal{R} \setminus \mathfrak{m} \right\}.
+\]. Reducing \(\rho\) modulo \(\mathfrak{m}\) gives a representation \(\overline{\rho}: G \to \mathrm{GL}_n(K)\). By the definition of Brauer characters, the Brauer character of \(\overline{\rho}\) is exactly \(\chi|_{G_{p'}}\). Hence \(\chi|_{G_{p'}}\) is a Brauer character, i.e., a nonnegative integer linear combination of elements of \(\operatorname{IBr}(G)\).
+
+Thus each term in (2) is a linear combination of elements of \(\operatorname{IBr}(G)\). Therefore \(f\) is a linear combination of elements of \(\operatorname{IBr}(G)\). Hence \(\operatorname{IBr}(G)\) spans the space of class functions on \(G_{p'}\).
+
+
+\end{proof}
+
+\section{Decomposition Matrix}
+
+\begin{defn}[Decomposition Matrix]
+Let \(\chi_1, \dots, \chi_n\) be the irreducible ordinary characters of \(G\) over an algebraically closed field $K$, and let \(\phi_1, \dots, \phi_k\) be the irreducible Brauer characters. The \textbf{decomposition matrix} \(D = (d_{ij})_{n\times k}\) is defined by
+\[
+\chi_i|_{G_{p'}} = \sum_{j=1}^k d_{ij} \phi_j,
+\]
+where \(d_{ij} \in \mathbb{Z}_{\ge 0}\).
+\end{defn}
+
+\begin{prop}
+The decomposition matrix has rank \(|\operatorname{IBr}(G)|\).
+\end{prop}
+
+\begin{proof}
+By Theorem \ref{thm:Brauer basis}, \(\operatorname{IBr}(G)\) is a basis of the vector space of class functions on \(G_{p'}\).
+The restrictions \(\chi|_{G_{p'}}\) for \(\chi \in \operatorname{Irr}(G)\) span this vector space because ordinary irreducible characters span all class functions on \(G\).
+Hence the rows of the decomposition matrix \(D\) span a space of dimension \(|\operatorname{IBr}(G)|\), so \(\operatorname{rank}(D) = |\operatorname{IBr}(G)|\).
+\end{proof}
+
+\begin{defn}[Cartan Matrix]
+The \textbf{Cartan matrix} is \(C = D^T D\), where $D$ is the decomposition matrix.
+\end{defn}
+By knowledge of linear algebra, we can easily prove the following proposition.
+
+\begin{prop}
+The Cartan matrix is  symmetric and positive definite.
+\end{prop}
+
+
+\begin{thm}
+Let $C = (c_{ij})$ be the Cartan matrix of a finite group $G$ over a field $K$ of characteristic $p$.
+\begin{enumerate}
+    \item If $p \nmid |G|$, then $C = I$.
+    \item If $p \mid |G|$, then $C \neq I$ and $c_{ii} \ge 2$ for all $i$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+For each irreducible $S_i$, let $P_i$ be its projective cover.
+
+\textbf{Case 1: $p \nmid |G|$.} By Maschke's Theorem, $K[G]$ is semisimple, so every $S_i$ is projective. Hence $P_i \cong S_i$. By Lemma \ref{Schur's Lemma, module form},
+\[
+c_{ij} = \dim_K \operatorname{Hom}_{K[G]}(P_i, P_j) = \dim_K \operatorname{Hom}_{K[G]}(S_i, S_j) = \delta_{ij}.
+\]
+Thus $C = I$.
+
+\textbf{Case 2: $p \mid |G|$.} Here $K[G]$ is not semisimple. The projective cover $P_i$ has $S_i$ as both its top and socle. Since $P_i \not\cong S_i$, it must contain $S_i$ at least twice in its composition series. Therefore $c_{ii} \ge 2$, so $C \neq I$.
+\end{proof}
+
+\begin{remark}
+The more $C$ deviates from $I$, the more non-semisimple the representation theory becomes.
+\end{remark}
+
+\section{A Look Ahead}
+
+The preceding sections give a first glimpse into modular representation 
+theory over a field of characteristic~$p$. We have seen that the group 
+algebra $kG$ is no longer semisimple, that the ordinary character theory 
+must be modified, and that the decomposition matrix records how ordinary 
+irreducible representations reduce modulo~$p$. 
+
+This is, however, only the very beginning of the subject. A complete 
+treatment would require tools that are beyond the scope of this 
+note. Some of the major 
+topics that lie ahead:
+
+\begin{itemize}
+\item the Brauer First, Second, and Third Main Theorems, which form 
+the foundation of block theory;
+\item the Cartan matrix and its relation to the decomposition matrix;
+\item projective covers, relatively projective modules, and the stable 
+category;
+\item Green correspondence and the study of sources and inductions;
+\item the Alperin weight conjecture and the McKay conjecture, which 
+connect modular representations to the local structure of finite groups.
+\end{itemize}
+
+All of these require substantially more advanced algebra—in particular, 
+homological algebra and a systematic use of $p$-local subgroups. 
+Introducing them here would obscure the beautiful core ideas with 
+technical machinery that is better left for a later course.
+
+For the interested reader, you can read \cite{serre1977linear} and \cite{alperin1977modular} for further study.
+
+This is where our journey of modular representation 
+theory ends, and where the real one begins.

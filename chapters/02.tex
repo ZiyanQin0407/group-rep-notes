@@ -1,0 +1,187 @@
+\chapter{Linear Representations }
+
+Now we introduce the linear representations of finite groups.
+\begin{defn}[Linear Representation]
+Let  \(G\) be a finite group and  \(V\) a finite-dimensional vector space over a field \(K\). 
+A \textbf{(linear) representation} of \(G\) on \(V\) is a pair $(\rho,V)$ where
+\[
+\rho: G \longrightarrow \mathrm{GL}(V),
+\]
+is a group homomorphism.
+
+In this case, \(V\) is a \(K[G]\)-module via \(g \cdot v = \rho(g)(v)\).
+
+
+Define $\operatorname{dim} \rho :=\operatorname{dim} V$ is the \textbf{dimension} of $\rho$.
+\end{defn}
+
+\begin{remark}
+Based on the definition above, one might be reminded of group actions. 
+Strictly speaking, a group action and a linear representation belong to different categories and have different types.
+
+Fix a finite-dimensional vector space $V$.
+A group action is a binary mapping \( \alpha: G \times V \to V \), while a linear representation is a group homomorphism \( \rho: G \to \mathrm{GL}(V) \), which is a unary mapping.
+
+They are related by the following canonical construction: given a linear action \( \alpha \), one defines \( \rho(g) := \alpha(g, -) \in \mathrm{GL}(V) ,\;\forall g\in G\). Conversely, any representation induces an action via \( g \cdot v = \rho(g)(v) \). We will freely pass between these two equivalent perspectives, but we emphasize that they are formally distinct.
+\end{remark}
+
+\begin{defn}
+Let \(\rho_1: G \to \mathrm{GL}(V_1)\) and \(\rho_2: G \to \mathrm{GL}(V_2)\) be two representations of a group \(G\) over a field \(K\). A \textbf{homomorphism} (or \textbf{intertwining operator}) from \(\rho_1\) to \(\rho_2\) is a linear map \(T: V_1 \to V_2\) such that
+\[
+T \circ \rho_1(g) = \rho_2(g) \circ T \quad \text{for all } g \in G.
+\]
+If \(T\) is a linear isomorphism, we say that \(\rho_1\) and \(\rho_2\) are \textbf{isomorphic} (or \textbf{equivalent}), and write
+\[
+\rho_1 \cong \rho_2.
+\]
+\end{defn}
+
+\begin{defn}[Subrepresentation]
+Let \((\rho,V)\) be a representation of \(G\). A \textbf{subrepresentation} of \(\rho\) is a pair \((\rho|_W,W)\) where
+\begin{enumerate}
+    \item \(W \subseteq V\) is a vector subspace satisfying \(\rho(g)(W) \subseteq W,\forall g \in G\) (i.e., $W$ is $G$-invariant);
+    \item \(\rho|_W : G \to \mathrm{GL}(W),\quad g\mapsto \rho(g)\).
+\end{enumerate}
+\end{defn}
+
+\begin{thm}[Maschke's Theorem, representation form]\label{existence of invariant complement}
+Let \(\rho: G \to \mathrm{GL}(V)\) be a finite-dimensional representation of a finite group \(G\) over a field \(K\) with \(\operatorname{char} K \nmid |G|\). If \(W \subseteq V\) is a \(G\)-invariant subspace, then there exists a \(G\)-invariant complement \(W^0\) of \(W\) in \(V\).
+\end{thm}
+
+\begin{proof}
+
+Take \(W'\) be any vector subspace of \(V\) such that \(V = W \oplus W'\). 
+Let \[\pi: V \to W,\quad v=w+w'\mapsto w,\]
+where $(
+w,w')\in W\times W'$.
+
+Define
+\[
+\pi^0 := \frac{1}{|G|} \sum_{t \in G} \rho(t )\circ \pi \circ (\rho(t))^{-1}.
+\]
+
+It is easy to check that \(\pi^0\) is also a projection, hence, \(\operatorname{im}\pi^0=W\). 
+
+Now let \(W^0 := \ker \pi^0\). We have \(V = W \oplus W^0\). For any \(s \in G\),
+\[
+\rho(s) \circ \pi^0 \circ \rho(s)^{-1}
+= \frac{1}{|G|} \sum_{t \in G} \rho(s) \rho(t) \pi \rho(t)^{-1} \rho(s)^{-1}
+= \frac{1}{|G|} \sum_{t \in G} \rho(st) \pi \rho(st)^{-1}
+= \pi^0.
+\]
+Thus \(\rho(s) \circ \pi^0 = \pi^0 \circ \rho(s),\quad\forall s\in G\).
+Then for any \(x \in W^0\) and any \(s \in G\), we have
+\[
+\pi^0(\rho(s) (x)) = \rho(s)(\pi^0( x)) = \rho(s)(0) = 0,
+\]
+so \(\rho(s)(x) \in W^0\). Hence \(W^0\) is \(G\)-invariant.
+\end{proof}
+
+
+\begin{defn}[Irreducible Representation]
+A representation \((\rho, V)\) is called \textbf{irreducible} (or \textbf{simple}) if:
+\begin{enumerate}
+    \item \(V \neq \{0\}\), 
+    \item the only \(G\)-invariant subspaces of \(V\) are \(\{0\}\) and \(V\) itself.
+\end{enumerate}
+
+
+Equivalently, a representation is irreducible if it cannot be written as a direct sum of two nonzero subrepresentations. 
+\end{defn}
+\begin{exmp}
+Representations of dimension 1 are always irreducible (since a 1-dimensional space has no nontrivial subspaces).
+\end{exmp}
+
+
+\begin{prop}[Complete Reducibility]
+Every finite-dimensional representation of a finite group \(G\) over a field $K$ satisfying  \(\operatorname{char} K \nmid |G|\) is a direct sum of irreducible representations (i.e., completely reducible).
+\end{prop}
+\begin{proof}
+Let \((\rho, V)\) be a finite-dimensional representation of \(G\) over a field \(F\) with \(\operatorname{char} F = 0\). We proceed by induction on \(\dim_F V\).
+
+If \(V\) is irreducible, there is nothing to prove. Otherwise, let \(W \subset V\) be a nonzero proper \(G\)-invariant subspace. By Theorem \ref{existence of invariant complement}, \(W\) has a \(G\)-invariant complement $W^0$.
+Apply the induction hypothesis to \(W\) and $W^0$.
+\end{proof}
+Now we introduce some ring and module theory in order to compare the other two versions of Maschke's theorem with the representation theory version.
+
+\begin{defn}
+A nonzero left \(R\)-module \(M\) is called \textbf{simple} (or \textbf{irreducible}) 
+if it has no proper nonzero submodules. Equivalently, the only submodules of \(M\) 
+are \(0\) and \(M\) itself.
+
+
+A left \(R\)-module \(M\) is called \textbf{semisimple} (or \textbf{completely reducible}) 
+if every submodule of \(M\) is a direct summand, i.e., for every submodule \(N \leq M\), 
+there exists a submodule \(N' \leq M\) such that 
+\[
+M = N \oplus N'.
+\]
+Equivalently, A left \(R\)-module \(M\) is \textbf{semisimple} if it is a direct sum of simple submodules:
+\[
+M = \bigoplus_{i \in I} S_i,
+\]
+where each \(S_i\) is a simple \(R\)-module.
+
+
+A finite-dimensional \(K\)-algebra \(A\) is called \textbf{semisimple} if every \(A\)-module is semisimple.
+Equivalently, a finite-dimensional algebra \(A\) is \textbf{semisimple} if \(A\) is semisimple as a left module over itself.
+\end{defn}
+
+\begin{thm}[Maschke's Theorem, module form]
+\label{Maschke's Theorem, module form}
+Let $G$ be a finite group and $K$ a field with $\operatorname{char} K \nmid |G|$. 
+Then every $K[G]$-module is semisimple.
+\end{thm}
+\begin{thm}[Maschke's Theorem, algebra form]
+\label{Maschke's Theorem, algebra form}
+Let $G$ be a finite group and $K$ a field with $\operatorname{char} K \nmid |G|$. 
+Then the group algebra $K[G]$ is a semisimple algebra.
+\end{thm}
+
+\begin{remark}
+There is a direct dictionary between representations and modules over the group algebra:
+\[
+\begin{array}{c|c}
+\text{Representation Theory} & \text{Module Theory} \\
+\hline
+\text{irreducible representation} & \text{simple module} \\
+\text{completely reducible representation} & \text{semisimple module} \\
+\text{every representation is completely reducible} & K[G] \text{ is a semisimple algebra}
+\end{array}
+\]
+
+The following are equivalent
+\begin{enumerate}
+    \item Every representation of $G$ over $K$ is completely reducible.
+    \item Every $K[G]$-module is semisimple.
+    \item $K[G]$ is a semisimple algebra.
+\end{enumerate}
+
+
+\end{remark}
+
+\begin{defn}[Tensor Product of Representations]
+Let \(\rho_1: G \to \mathrm{GL}(V_1)\) and \(\rho_2: G \to \mathrm{GL}(V_2)\) be two representations of a group \(G\). The \textbf{tensor product} of the given representations is a representation defined by
+\[
+\rho:G\to\operatorname{GL}(V_1 \otimes V_2),\quad s \mapsto \rho_1(s)\otimes\rho_2(s).
+\]
+\end{defn}
+\begin{exmp}[Symmetric and Alternating Squares]
+Let \((\rho, V)\) be a representation of \(G\). Let \(\theta: V \otimes V \to V \otimes V\) be the linear mapping defined on basis vectors by
+\[
+\theta(e_i \otimes e_j) = e_j \otimes e_i.
+\]
+Then \(\theta\) is independent of the chosen basis, \(\theta^2 = \mathrm{id}\), and \(\theta\) commutes with each \(\rho(g) \otimes \rho(g)\).
+
+The \textbf{symmetric square} and \textbf{alternating square} are given by
+\[
+\operatorname{Sym}^2(V) = \{ z \in V \otimes V \mid \theta(z) = z \}, \qquad
+\operatorname{Alt}^2(V) = \{ z \in V \otimes V \mid \theta(z) = -z \},
+\]
+which are \(G\)-invariant, hence, \(((\rho\otimes\rho)|_{\operatorname{Sym}^2(V)},\operatorname{Sym}^2(V))\) and \(((\rho\otimes\rho)|_{\operatorname{Alt}^2(V)},\operatorname{Alt}^2(V))\) are subrepresentations of \(V \otimes V\).
+
+\end{exmp}
+
+
+
+

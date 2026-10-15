@@ -1,0 +1,177 @@
+\chapter{Mackey's Irreducibility Criterion}
+
+
+Before we prove an important criterion--Mackey's irreducibility criterion to judge whether \(\operatorname{Ind}_H^G \rho\) is irreducible, we first introduce the following lemma. 
+\begin{lemma}\label{lem:Mackey's Irreducibility Criterion}
+Let \(H \le G\), \(L \le G\), and let \((\rho, W)\) be a representation of \(H\). Define
+\[
+L_s := L \cap s H s^{-1}, \qquad
+\rho^s(x) := \rho(s^{-1} x s) , \forall x \in L_s.
+\]and  \(W^s\) the vector space \(W\) equipped with the \(L_s\)-action given by
+\[
+x \cdot w = \rho^s(x) w , \qquad \forall(x,w) \in L_s\times W.
+\]
+Then
+\[
+\operatorname{Res}_L^G \operatorname{Ind}_H^G W
+\cong
+\bigoplus_{s \in S}
+\operatorname{Ind}_{L_s}^L (W^s),
+\]
+where \(S \subseteq G\) be a set of representatives for the  double cosets \(L\backslash G/H\).
+
+Equivalently, we have\[
+\operatorname{Res}_L^G \operatorname{Ind}_H^G \rho
+\cong
+\bigoplus_{s \in S}
+\operatorname{Ind}_{L_s}^L (\rho^s),
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(R \subseteq G\) be a set of representatives for the left cosets \(G/H\). By definition,
+\[
+\operatorname{Ind}_H^G W = \bigoplus_{r \in R} (r \otimes W).
+\]
+
+For some $s\in S$, define
+\[
+V(s) = \bigoplus_{\substack{r \in R \\ r \in L s H}} r \otimes W.
+\]
+Then we have
+\[
+\operatorname{Res}_L^G \operatorname{Ind}_H^G W = \operatorname{Ind}_H^G W=\bigoplus_{s \in S} V(s).
+\]
+We claim each \(V(s)\) is \(L\)-stable and is isomorphic to \(\operatorname{Ind}_{L_s}^L (W^s)\) as a \(L\)-representation.
+
+Fix \(s \in S\). We can check that
+\[
+L_s = \{ l \in L: l s \otimes W = s \otimes W \} .
+\]
+Moreover, let \(T \subseteq L\) be a set of representatives for the left cosets $L/L_s$. Then\[V(s) = \bigoplus_{t \in T} t\otimes (s \otimes W)\cong \operatorname{Ind}_{L_s}^L (s \otimes W).\]
+Define
+\[
+\Phi_s: V(s) \to \operatorname{Ind}_{L_s}^L W
+\]
+on basis elements by
+\[
+t\otimes (s \otimes w)\mapsto t \otimes w,
+\]
+and extend linearly.
+
+\medskip
+\noindent\textbf{Well-defined:} If \(t \otimes (s \otimes w) = t' \otimes (s \otimes w')\), then \(t'^{-1} t \in L_s\) and \(w' = \rho(s^{-1} t'^{-1} t s) w\). Then
+\[
+t \otimes w = t' (t'^{-1} t) \otimes w = t' \otimes \rho(s^{-1} t'^{-1} t s) w = t' \otimes w',
+\]
+so \(\Phi_s\) is well-defined.
+
+\medskip
+\noindent\textbf{Bijective:} The basis \(\{t \otimes (s \otimes w)\}\) of \(V(s)\) maps bijectively to the basis \(\{t \otimes w\}\) of \(\operatorname{Ind}_{L_s}^L W\).
+
+\medskip
+\noindent\textbf{\(L\)-equivariant:} For \(l \in K\), write \(l t = t' \kappa\) with \(t' \in T\), \(\kappa \in L_s\). Then
+\[
+\Phi_s(l \cdot (t\otimes( s \otimes w))) = \Phi_s(t'\otimes( s \otimes \rho(s^{-1} \kappa s) w)) = t' \otimes \rho(s^{-1} \kappa s) w.
+\]
+On the other hand,
+\[
+l \cdot \Phi_s(t\otimes( s \otimes w)) = l \cdot (t \otimes w) = t' \otimes \rho^s(\kappa) w = t' \otimes \rho(s^{-1} \kappa s) w.
+\]
+Both sides are equal, so \(\Phi_s\) is \(L\)-equivariant.
+
+Hence \(V(s) \cong \operatorname{Ind}_{L_s}^L(W^s)\). Summing over \(s\) completes the proof.
+\end{proof}
+
+\begin{remark}
+The isomorphism class of \(\operatorname{Ind}_{H_s}^L W_s\) depends only on \(s\) in \(S\).
+\end{remark}
+
+\begin{defn}
+For \(s \in G\), define the \textbf{twisted subgroup}
+\[
+H_s := H \cap s H s^{-1}.
+\]
+For a representation \(\rho\) of \(H\), let \(\rho^s\) be the representation of \(H_s\) given by
+\[
+\rho^s(x) := \rho(s^{-1} x s), \qquad x \in H_s.
+\]
+\end{defn}
+
+
+\begin{thm}[Mackey's Irreducibility Criterion]
+Let \(H\) be a subgroup of group $G$ and let \((\rho, V)\) be a representation of \(H\). Then \(\operatorname{Ind}_H^G \rho\) is irreducible if and only if:
+
+\begin{enumerate}
+\item \(\rho\) is irreducible;
+\item For every \(s \in G \setminus H\), the two representations \(\rho^s\) and \(\operatorname{Res}_{H_s}^H \rho\) of \(H_s\) are disjoint (i.e., have no common irreducible constituents).
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Let \((\rho, W)\) be a representation of \(H\). By Theorem \ref{Frobenius Reciprocity},
+\[
+\frac{1}{|G|} \sum_{g \in G} \chi_{\operatorname{Ind}_H^G \rho}(g) \overline{\chi_{\operatorname{Ind}_H^G \rho}(g)}
+=
+\frac{1}{|H|} \sum_{h \in H} \chi_{\rho}(h) \overline{ \chi_{\operatorname{Res}_H^G \operatorname{Ind}_H^G \rho}(h) }.
+\]
+
+By Lemma \ref{lem:Mackey's Irreducibility Criterion} with \(K = H\), 
+\[
+\operatorname{Res}_H^G \operatorname{Ind}_H^G \rho
+\cong
+\bigoplus_{s \in S}
+\operatorname{Ind}_{H_s}^H (\rho^s),
+\]
+where \(S \subseteq G\) be a set of representatives for the  double cosets \(H\backslash G/H\).
+
+Hence
+\[
+\frac{1}{|H|} \sum_{h \in H} \chi_{\rho}(h) \overline{ \chi_{\operatorname{Res}_H^G \operatorname{Ind}_H^G \rho}(h) }
+=
+\frac{1}{|H|} \sum_{h \in H}
+\chi_{\rho}(h) \sum_{s \in S}\overline{ \chi_{\operatorname{Ind}_{H_s}^H (\rho^s)}(h) }.
+\]
+
+Applying Theorem \ref{Frobenius Reciprocity} again,
+\[
+\frac{1}{|H|} \sum_{h \in H}
+\chi_{\rho}(h) \overline{ \chi_{\operatorname{Ind}_{H_s}^H (\rho^s)}(h) }
+=
+\frac{1}{|H_s|} \sum_{x \in H_s}
+\chi_{\operatorname{Res}_{H_s}^H \rho}(x) \overline{ \chi_{\rho^s}(x) }.
+\]
+
+Thus
+\[
+\frac{1}{|G|} \sum_{g \in G} \chi_{\operatorname{Ind}_H^G \rho}(g) \overline{\chi_{\operatorname{Ind}_H^G \rho}(g)}
+=
+\sum_{s \in S}
+\frac{1}{|H_s|} \sum_{x \in H_s}
+\chi_{\operatorname{Res}_{H_s}^H \rho}(x) \overline{ \chi_{\rho^s}(x) }.
+\]
+If \(\rho\) is not irreducible, then there exist nonzero subrepresentations \(\rho_1, \rho_2\) of \(\rho\) such that
+\[
+\rho \cong \rho_1 \oplus \rho_2.
+\]
+Then
+\[
+\operatorname{Ind}_H^G \rho \cong \operatorname{Ind}_H^G \rho_1 \oplus \operatorname{Ind}_H^G \rho_2.
+\]
+Both summands are nonzero , so \(\operatorname{Ind}_H^G \rho\) is not irreducible.
+
+
+Now suppose \(\rho\) is irreducible:
+\begin{itemize}
+    \item Taking \(s = 1\), we have \(H_1 = H\) and \(\rho^1 = \rho\). Hence \[
+    \frac{1}{|H|} \sum_{h \in H} \chi_{\rho}(h) \overline{\chi_{\rho}(h)}=1.
+    \]
+  
+    \item For every other double coset with \(s \neq 1\), 
+    \[
+    \frac{1}{|H_s|} \sum_{x \in H_s}
+    \chi_{\operatorname{Res}_{H_s}^H \rho}(x) \overline{ \chi_{\rho^s}(x) }
+    \]
+    is zero if and only if \(\operatorname{Res}_{H_s}^H \rho\) and \(\rho^s\) have no common irreducible constituent.
+\end{itemize}
+
+\end{proof}

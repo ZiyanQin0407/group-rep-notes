@@ -1,0 +1,989 @@
+
+\chapter{Representations over Non-algebraic Closed Field}
+
+So far we have studied representations over \(\mathbb{C}\), an algebraically closed field with characteristic zero. In this section, we drop the algebraic closure assumption and work over an arbitrary field \(K\) of characteristic zero.
+
+\section{Scalar Extension and Absolute Irreducibility}
+
+\begin{defn}
+Let \((\rho, V)\) be a representation of \(G\) over a field \(K\). Let \(\overline{K}\) be an algebraic closure of \(K\). The \textbf{scalar extension} of \(\rho\) to \(\overline{K}\) is the representation $(\rho_{\overline{K}},V_{\overline{K}})$ where
+
+\[V_{\overline{K}}:=V \otimes_K \overline{K},\qquad
+\rho_{\overline{K}}: G \to \mathrm{GL}(V_{\overline{K}}), \quad g\mapsto(v \otimes \lambda\mapsto\rho(g)v \otimes \lambda).
+\]
+\end{defn}
+
+\begin{remark}
+Actually, the properties over $\mathbb C$ we discussed in section 4-9 also hold over \(\overline{K}\).
+\end{remark}
+
+\begin{defn}
+A representation \((\rho, V)\) over \(K\) is called \textbf{absolutely irreducible} if its scalar extension $(\rho_{\overline{K}},V_{\overline{K}})$ is irreducible over \(\overline{K}\).
+
+A character is called  \textbf{absolutely irreducible} if it is a character of absolutely irreducible representation.
+\end{defn}
+
+\begin{remark}
+Over algebraically closed fields, every irreducible representation is absolutely irreducible. 
+\end{remark}
+
+
+\begin{lemma}[Artin--Wedderburn, General Field Version]
+\label{thm:Artin--Wedderburn, General Field Version}
+Let $A$ be a finite-dimensional semisimple $F$-algebra. Then there exist division algebras $D_1,\dots,D_r$ over $F$ and positive integers $n_1,\dots,n_r$ such that
+\[
+A \cong M_{n_1}(D_1) \oplus M_{n_2}(D_2) \oplus \cdots \oplus M_{n_r}(D_r),
+\]
+where $M_n(D)$ denotes the algebra of $n\times n$ matrices with entries in $D$. Moreover, the pairs $(n_i,D_i)$ are uniquely determined up to permutation.
+\end{lemma}
+
+\begin{proof}
+We divide the proof into several steps.
+
+\medskip
+\noindent\textbf{Step 1: Reduction to simple algebras.}
+
+Since $A$ is semisimple, by definition it is a direct sum of minimal two-sided ideals:
+\[
+A = I_1 \oplus I_2 \oplus \cdots \oplus I_r,
+\]
+where each $I_i$ is a simple algebra. Thus it suffices to prove the theorem for a simple algebra.
+
+\medskip
+\noindent\textbf{Step 2: Structure of a simple algebra.}
+
+Let $B$ be a finite-dimensional simple $F$-algebra. Choose a minimal left ideal $L \subseteq B$. By minimality, $L$ is an irreducible left $B$-module. Let
+\[
+D := \operatorname{End}_B(L).
+\]
+By Lemma \ref{Schur's Lemma, module form}, $D$ is a division algebra.
+
+We claim that $B$ acts faithfully on $L$. Indeed, if $bL=0$ for some $b\in B$, then the left ideal $Bb$ annihilates $L$. Since the annihilator of $L$ is a two-sided ideal of $B$ and $B$ is simple, it must be $0$. Hence the map
+\[
+B \longrightarrow \operatorname{End}_D(L)
+\]
+given by $b \mapsto (x \mapsto bx)$ is injective.
+
+\medskip
+\noindent\textbf{Step 3: $B$ is isomorphic to $\operatorname{End}_D(L)$.}
+
+We show that the above map is surjective. Let $n := \dim_D L$. Since $L$ is finite-dimensional over $D$, we have $L \cong D^n$ as right $D$-vector spaces. Then
+\[
+\operatorname{End}_D(L) \cong M_n(D).
+\]
+We need to prove $B \cong \operatorname{End}_D(L)$.
+
+Since $B$ is a finite-dimensional $D$-algebra acting faithfully on $L$, and $\operatorname{End}_D(L)$ is a simple algebra (as $M_n(D)$ is simple), the image of $B$ in $\operatorname{End}_D(L)$ is a subalgebra. But by the Double Centralizer Theorem for the pair $(B,L)$ -- which we are in the process of proving in this special case -- one can show directly that the image equals $\operatorname{End}_D(L)$.
+
+A standard direct argument: Since $B$ is semisimple, $L$ as a left $B$-module is a direct sum of copies of the irreducible module $L$. Indeed, $B$ itself, as a left $B$-module, decomposes into $n$ copies of $L$ (because $B \cong L^{\oplus n}$ for some $n$, since $B$ is semisimple and $L$ is its unique irreducible module up to isomorphism). Thus $\dim_F B = n \dim_F L$. On the other hand, $\dim_F \operatorname{End}_D(L) = n^2 \dim_F D$. Since $\dim_F L = n \dim_F D$, we have
+\[
+\dim_F \operatorname{End}_D(L) = n^2 \dim_F D = n (n \dim_F D) = n \dim_F L = \dim_F B.
+\]
+Therefore the injective map $B \hookrightarrow \operatorname{End}_D(L)$ is an isomorphism.
+
+Hence
+\[
+B \cong \operatorname{End}_D(L) \cong M_n(D).
+\]
+
+\medskip
+\noindent\textbf{Step 4: Conclusion for semisimple algebras.}
+
+Applying Step 3 to each simple component $I_i$ of $A$, we obtain division algebras $D_i$ and integers $n_i$ such that
+\[
+I_i \cong M_{n_i}(D_i).
+\]
+Therefore
+\[
+A \cong \bigoplus_{i=1}^r M_{n_i}(D_i).
+\]
+
+The uniqueness of the decomposition follows from the uniqueness of the isotypic decomposition of $A$ as a left $A$-module, or from the fact that the simple components are precisely the minimal two-sided ideals.
+\end{proof}
+
+
+
+\begin{lemma}[Double Centralizer Theorem, General Field Version]
+\label{thm:doublecentralizer}
+Let $A$ be a finite-dimensional semisimple $F$-algebra, and let $V$ be a finite-dimensional semisimple left $A$-module. Let
+\[
+\rho: A \longrightarrow \operatorname{End}_F(V)
+\]
+be the structure homomorphism. Define the centralizer of $\rho(A)$ in $\operatorname{End}_F(V)$ by
+\[
+C(A):=\operatorname{End}_A(V)
+= \{\, T \in \operatorname{End}_F(V) \mid T\rho(a)=\rho(a)T,\ \forall a\in A \,\}.
+\]
+Then:
+\begin{enumerate}
+\item $C(A)$ is a semisimple algebra.
+\item The double centralizer property holds:
+\[
+C(C(A)):=\operatorname{End}_{C(A)}(V)=\rho(A).
+\]
+\end{enumerate}
+
+Moreover, if $\rho$ is injective, then $C(C(A))\cong A$.
+\end{lemma}
+
+\begin{proof}
+We divide the proof into several steps.
+
+\medskip
+\noindent\textbf{Step 1: Isotypic decomposition of }$V$.
+
+Since $V$ is a semisimple $A$-module, it decomposes into a direct sum of irreducible submodules. Grouping isomorphic irreducible submodules together, we obtain the isotypic decomposition
+\[
+V=\bigoplus_{i=1}^{r} W_i,
+\]
+where
+\[
+W_i \cong V_i^{\oplus m_i},
+\]
+$V_1,\dots,V_r$ are pairwise non-isomorphic irreducible left $A$-modules, and $m_i\ge 1$ are the multiplicities.
+
+By Lemma\ref{Schur's Lemma, module form},
+\[
+D_i:=\operatorname{End}_A(V_i)
+\]
+is a division algebra over $F$.
+
+\medskip
+\noindent\textbf{Step 2: Computation of the centralizer }$C(A)$.
+
+We claim that every $T\in \operatorname{End}_A(V)$ maps each isotypic component $W_i$ into itself. Indeed, if $T(W_i)\cap W_j \neq 0$ for $i\neq j$, then the composition
+\[
+\pi_j \circ T|_{W_i}: W_i \longrightarrow V_j
+\]
+is a nonzero $A$-module homomorphism. Since $W_i\cong V_i$ is irreducible, this map must be an isomorphism, contradicting $V_i\not\cong V_j$. Hence $T(W_i)\subseteq W_i$ for all $i$.
+
+Therefore,
+\[
+C(A)=\operatorname{End}_A(V)=\bigoplus_{i=1}^{r}\operatorname{End}_A(W_i).
+\]
+
+\medskip
+\noindent\textbf{Step 3: Computation of }$\operatorname{End}_A(W_i)$.
+
+We have $W_i=V_i^{\oplus m_i}$. Identify elements of $W_i$ as $m_i$-tuples $(v_1,\dots,v_{m_i})$ with $v_j\in V_i$. Any $T\in \operatorname{End}_A(W_i)$ is represented by an $m_i\times m_i$ matrix
+\[
+T =
+\begin{pmatrix}
+t_{11} & \cdots & t_{1m_i}\\
+\vdots & \ddots & \vdots\\
+t_{m_i1} & \cdots & t_{m_i m_i}
+\end{pmatrix},
+\quad t_{jk}\in \operatorname{End}_A(V_i)=D_i,
+\]
+where $t_{jk}$ denotes the $A$-homomorphism from the $k$-th copy to the $j$-th copy. Matrix multiplication follows the multiplication in $D_i$. Hence
+\[
+\operatorname{End}_A(W_i) \cong M_{m_i}(D_i),
+\]
+where $M_{m_i}(D_i)$ denotes the algebra of $m_i\times m_i$ matrices with entries in $D_i$.
+
+Consequently,
+\[
+C(A) \cong \bigoplus_{i=1}^{r} M_{m_i}(D_i).
+\]
+In particular, $C(A)$ is semisimple, since each $M_{m_i}(D_i)$ is a simple algebra and their direct sum is semisimple. This proves part (1) of the theorem.
+
+\medskip
+\noindent\textbf{Step 4: Decomposition of }$V$ \textbf{as a }$C(A)$\textbf{-module}.
+
+Let $B:=C(A)$. From Step 3, $B$ is a semisimple algebra. We now determine the decomposition of $V$ into irreducible $B$-modules.
+
+On the component $W_i=V_i^{\oplus m_i}$, the action of $B$ is given by the matrix algebra $M_{m_i}(D_i)$. The standard irreducible module for this matrix algebra is $D_i^{m_i}$ (column vectors with entries in $D_i$), and its multiplicity is $1$. Since $V_i$ is one-dimensional as a $D_i$-vector space (because $D_i=\operatorname{End}_A(V_i)$ acts on $V_i$), we have
+\[
+W_i \cong D_i^{m_i}
+\]
+as $M_{m_i}(D_i)$-modules.
+
+Thus, as a $B=C(A)$-module,
+\[
+V \cong \bigoplus_{i=1}^{r} D_i^{m_i},
+\]
+where each $D_i^{m_i}$ is an irreducible $B$-module corresponding to the matrix algebra $M_{m_i}(D_i)$.
+
+\medskip
+\noindent\textbf{Step 5: Computation of the double centralizer }$C(C(A))=\operatorname{End}_{B}(V)$.
+
+We now apply the result of Step 3 to the semisimple algebra $B=C(A)$ and its semisimple module $V$. Decompose $V$ into irreducible $B$-modules:
+\[
+V = \bigoplus_{i=1}^{r} U_i,
+\]
+where
+\[
+U_i := D_i^{m_i}
+\]
+are pairwise non-isomorphic irreducible $B$-modules.
+
+For each $i$, by Lemma \ref{Schur's Lemma, module form},
+\[
+E_i:=\operatorname{End}_B(U_i).
+\]
+But $U_i$ is the standard module for the matrix algebra $M_{m_i}(D_i)$, so
+\[
+\operatorname{End}_{M_{m_i}(D_i)}(D_i^{m_i}) \cong D_i,
+\]
+where the endomorphisms are given by scalar multiplication from $D_i$.
+
+Applying the formula from Step 3 (with $A$ replaced by $B$, $V_i$ replaced by $U_i$, and $m_i$ unchanged), we obtain
+\[
+\operatorname{End}_B(V) \cong \bigoplus_{i=1}^{r} M_{m_i}(E_i)
+= \bigoplus_{i=1}^{r} M_{m_i}(D_i).
+\]
+Therefore,
+\[
+C(C(A)) \cong \bigoplus_{i=1}^{r} M_{m_i}(D_i).
+\]
+
+\medskip
+\noindent\textbf{Step 6: Comparison of }$\rho(A)$ \textbf{and }$C(C(A))$.
+
+By Theorem \ref{thm:Artin--Wedderburn, General Field Version}, the action of $A$ on the isotypic component $W_i=V_i^{\oplus m_i}$ is given by
+\[
+\rho(A)|_{W_i} \cong M_{m_i}(D_i).
+\]
+Indeed, $A$ acts on $V_i$ as $\operatorname{End}_{D_i}(V_i)\cong D_i$ (since $V_i$ is one-dimensional as a $D_i$-module), and hence on $m_i$ copies we obtain $M_{m_i}(D_i)$.
+
+Thus,
+\[
+\rho(A) \cong \bigoplus_{i=1}^{r} M_{m_i}(D_i).
+\]
+
+Comparing this with the result of Step 5, we have
+\[
+C(C(A)) \cong \bigoplus_{i=1}^{r} M_{m_i}(D_i) \cong \rho(A).
+\]
+
+Since the natural inclusion $\rho(A)\subseteq C(C(A))$ always holds (any operator commuting with $C(A)$ certainly commutes with $A$), and the above isomorphisms give equality of dimensions, we conclude that
+\[
+C(C(A))=\rho(A)
+\]
+inside $\operatorname{End}_F(V)$. This proves part (2) of the theorem.
+\end{proof}
+
+
+\begin{lemma}\label{lem:absolutely_irreducible_criterion}
+A representation \((\rho, V)\) over \(K\) is absolutely irreducible if and only if
+\[
+\operatorname{End}_{K[G]}(V) = K\cdot\operatorname{id}_V.
+\]
+\end{lemma}
+
+\begin{proof}
+
+
+\medskip
+\noindent\textbf{Absolutely irreducible \(\implies \operatorname{End}_{K[G]}(V) = K\cdot \operatorname{id}_V\)}
+
+Assume that \(\rho\) is absolutely irreducible, i.e. \(\rho_{\overline{K}}\) is irreducible over \(\overline{K}\).
+Suppose that
+\[
+\operatorname{End}_{K[G]}(V) \neq K\cdot \operatorname{id}_V.
+\]
+Then there exists a \(K\)-linear mapping
+\[
+T \in \operatorname{End}_{K[G]}(V) \setminus 
+(K\cdot \operatorname{id}_V).
+\]
+
+Extend scalars to \(\overline{K}\). Then
+\[
+T_{\overline{K}}:=T\otimes_
+K \operatorname{id}_{\overline{K}}\in \operatorname{End}_{\overline{K}[G]}( V_{\overline{K}}).
+\]
+
+.Since \(\overline{K}\) is algebraically closed, \(T\) has an eigenvalue
+\(\lambda \in \overline{K}\). By Lemma \ref{Schur's Lemma}, \[T_{\overline{K}}=\lambda I\in \overline{K}\cdot \operatorname{id}_{V_{\overline{K}}},\]
+Choose a \(K\)-basis \(\{e_1,\dots,e_n\}\) of \(V\). Then for each \(i\),
+\[
+T(e_i) \otimes 1 = T_{\overline{K}}(e_i \otimes 1)
+= \lambda (e_i \otimes 1)
+= \lambda e_i \otimes 1.
+\]
+Since \(\{e_i\}\) is a basis, this implies \(T(e_i) = \lambda e_i\) for all \(i\). Hence \(\lambda \in K\) and \(T = \lambda \cdot \operatorname{id}_V\), contradicting the choice of \(T\). Therefore
+\[
+T_{\overline{K}} \notin \overline{K} \cdot \operatorname{id}_{V_{\overline{K}}},
+\]contradiction.
+
+Hence we must have
+\[
+\operatorname{End}_{K[G]}(V) = K\cdot \operatorname{id}_V.
+\]
+\medskip
+\noindent
+\textbf{ \(\operatorname{End}_{K[G]}(V) = K\cdot \operatorname{id}_V \implies\) Absolutely irreducible}
+
+Assume now that
+\[
+\operatorname{End}_{K[G]}(V) = K\cdot \operatorname{id}_V.
+\]
+By Lemma \ref{thm:doublecentralizer}, we have \[\operatorname{End}_K(V)=C(K)\cong C(\operatorname{End}_{K[G]}(V))=C(C(K[G]))=\rho(K[G]).\]
+
+Now extend scalars from \(K\) to \(\overline{K}\). Hence \[\operatorname{End}_{\overline{K}}(V_{\overline{K}})\cong \operatorname{End}_{K}(V) \otimes_K \overline{K}\cong\rho(K[G]) \otimes_K \overline{K}\cong\rho_{\overline{K}}(\overline{K}[G]),\]
+
+Suppose that \(\rho_{\overline{K}}\) is reducible.
+Then there exists a nontrivial \(G\)-invariant subspace
+\[
+0 \neq W \subsetneq V_{\overline{K}}.
+\]
+Let \(P: V \otimes_K \overline{K} \to W\) be a linear projection onto \(W\).
+Define
+\[
+P^0 := \frac{1}{|G|} \sum_{g \in G} \rho_{\overline{K}}(g) \, P \, \rho_{\overline{K}}(g)^{-1}.
+\]
+Then \(P^0\) is again a linear projection onto \(W\) and
+\[
+P^0 \rho_{\overline{K}}(h) = \rho_{\overline{K}}(h) P^0, \quad \forall h \in G.
+\]
+
+
+Therefore, \(P^0\) commutes with every element in
+\(\operatorname{End}_{\overline{K}}(V_{\overline{K}})\).
+
+Hence
+\[
+P \in Z\left(\operatorname{End}_{\overline{K}}(V_{\overline{K}})\right),
+\]
+where \(Z\) denotes the center. 
+
+By some knowledge in linear algebra, 
+\[
+Z\left(\operatorname{End}_{\overline{K}}(V_{\overline{K}})\right)
+= \overline{K} \cdot I.
+\]
+Thus \(P = \lambda I\) for some \(\lambda \in \overline{K}\).
+
+Since \(P\) is a projection, \(P^2 = P\). Hence
+\[
+\lambda^2 I = \lambda I \implies \lambda \in \{0, 1\}.
+\]
+If \(\lambda = 0\), then \(P = 0\), contradicting \(\operatorname{Im} P = W \neq 0\).
+If \(\lambda = 1\), then \(P = I\), contradicting \(W \subsetneq V_{\overline{K}}\).
+
+Therefore \(\rho_{\overline{K}}\) must be irreducible, i.e., $\rho$ is absolutely irreducible.
+
+
+\end{proof}
+
+
+\section{Decomposition of Scalars and Schur Index}
+
+Let \((\rho, V)\) be an irreducible representation of a finite group $G$ over \(K\), and let \(\overline{K}\) be an algebraic closure of $K$. 
+\[
+V_{\overline{K}} \cong \bigoplus_{i=1}^r W_i^{\oplus m_i},
+\]
+where the \((\rho_i,W_i)\) are pairwise non-isomorphic irreducible representations over \(\overline{K}\). 
+
+
+\begin{notation}
+\(\Gamma := \operatorname{Gal}(\overline{K}/K)\).
+
+\end{notation}
+
+
+\begin{lemma}\label{lem:galois_orbit}
+The set \(\{W_1, \dots, W_r\}\) is a single orbit under the action of \(\Gamma\). Moreover, \(m_1 = \cdots = m_r\).
+\end{lemma}
+
+\begin{proof}
+The Galois group \(\Gamma \) acts on the set of irreducible \(\overline{K}[G]\)-modules by acting on the coefficients. 
+
+Since \(V\) is defined over \(K\), the decomposition of \(V_{\overline{K}}\) is \(\Gamma\)-stable. Thus \(\Gamma\) permutes the \(W_i\). Since \(\Gamma\) acts transitively on the irreducible constituents of a \(K\)-irreducible module (otherwise the sum of a nontrivial orbit would be defined over \(K\), giving a proper \(K\)-submodule, contradiction),  the \(W_i\) form a single orbit.
+
+The multiplicities are equal because the action of \(\Gamma\) preserves multiplicities.
+\end{proof}
+
+\begin{notation}
+$m:=m_1=\cdots=m_r$
+\end{notation}
+\begin{remark}\label{rem:Decomposition of Scalars}
+Let \(\chi\) be the character of the irreducible representation  $\rho$ over \(K\). Let \(\chi_i\) be the irreducible character of  \(\rho_i\) over \(\overline{K}\) for every $i\in\{1,\dots,r\}$. Then
+\[
+\chi = m\sum_{i=1}^r \chi_i.
+\]
+Each \(\chi_i\) is an absolutely irreducible character.
+
+Morover, the set \(\{\chi_i\}\) is a orbit under the action of  $\Gamma$( \(\sigma \cdot \chi_i\) is the character defined by \((\sigma \cdot \chi_i)(g) := \sigma(\chi_i(g)),\quad\forall g\in G\), the compatibility with conjugacy classes see Proposition \ref{prop:galois_compat} below. )
+\end{remark}
+
+\begin{defn}
+Let \((\rho,V)\) be an irreducible representation over \(K\). The \textbf{Schur index} of \(\rho\) (or of its character \(\chi\)) is
+\[
+m_K(\chi) := \sqrt{[\operatorname{End}_{K[G]}(V) : K]}.\]
+\end{defn}
+
+\begin{lemma}\label{lem:schur_index_and_galois}
+Let \(\chi\) be the character of $(\rho,V)$ over \(K\). Let \(\chi_i\) be the irreducible character of  \((\rho_i,W_i)\) over \(\overline{K}\) for every $i\in\{1,\dots,r\}$. Then
+\[
+m_K(\chi)^2=r\cdot m^2.
+\]
+\end{lemma}
+
+\begin{proof}
+\[m_K(\chi)^2
+= \dim_K \operatorname{End}_{K[G]}(V)
+= \dim_{\overline{K}}(\operatorname{End}_{K[G]}(V) \otimes_K \overline{K})
+= \dim_{\overline{K}} \operatorname{End}_{\overline{K}[G]}(V_{\overline{K}})
+.\]
+By Lemma  \ref{lem:galois_orbit}, \[\dim_{\overline{K}} \operatorname{End}_{\overline{K}[G]}(V_{\overline{K}})=\dim_{\overline{K}} \operatorname{End}_{\overline{K}[G]}(\bigoplus_{i=1}^r W_i^{\oplus m})= r \cdot m^2.\]
+\end{proof}
+
+By Lemma \ref{lem:schur_index_and_galois}, it is easy to get the following corollary.
+
+\begin{cor}
+\(m_K(\chi) = 1\) if and only if \(\rho\) is absolutely irreducible.
+\end{cor}
+
+\section{Character Table and Galois Compatibility}
+
+
+\begin{notation}
+We use the notation $\operatorname{Irr}(G)$ to represent the irreducible complex representations before. In following subsections, without causing confusion, we denote by \(\operatorname{Irr}_{K}(G)\) the set of irreducible characters or the set of irreducible representations over \(K\) of \(G\).
+Simply, $\operatorname{Irr}(G):=\operatorname{Irr}_{\mathbb{C}}(G)$.
+
+Denote by \(\operatorname{Cl}(G)\) the set of conjugacy classes of \(G\).
+\end{notation}
+
+
+\begin{defn}[Character Table over Algebraic Closed Field]
+\label{def:char_table}
+The \textbf{character table} of \(G\) over \(\overline{K}\) is the matrix
+\[
+\mathcal T := \bigl( \chi(C) \bigr)_{\chi \in \operatorname{Irr}_{\overline{K}}(G),\ C \in \operatorname{Cl}(G)}.
+\]
+Its rows are indexed by the irreducible \(\overline{K}\)-characters, its columns by the conjugacy classes of $G$.
+\end{defn}
+
+\begin{prop}[Invertibility of the Character Table]
+\label{prop:char_table_invertible}
+The character table \(\mathcal T\) of \(G\) over \(\overline{K}\) is an invertible square matrix.
+\end{prop}
+
+\begin{proof}
+Let \(h := |\operatorname{Irr}_{\overline{K}}(G)|\) be the number of rows, and let \(k := |\operatorname{Cl}(G)|\) be the number of columns. We first prove \(h = k\), then show the rows are linearly independent.
+
+\medskip
+\noindent\textbf{Step 1: Orthogonality of rows.}  
+For two irreducible characters \(\chi_i, \chi_j \in \operatorname{Irr}_{\overline{K}}(G)\), the first orthogonality relation says
+\[
+\sum_{C \in \operatorname{Cl}(G)} \frac{|C|}{|G|} \, \chi_i(C) \overline{\chi_j(C)} = \delta_{ij}.
+\]
+This means the \(h\) row vectors
+\[
+\left( \sqrt{\frac{|C|}{|G|}} \, \chi(C) \right)_{C \in \operatorname{Cl}(G)}
+\]
+are orthonormal in \(\mathbb C^k\). Hence they are linearly independent, so we must have
+\[
+h \le k. 
+\]
+
+\medskip
+\noindent\textbf{Step 2: Orthogonality of columns.}  
+For two conjugacy classes \(C, D \in \operatorname{Cl}(G)\), the second orthogonality relation says
+\[
+\sum_{\chi \in \operatorname{Irr}_{\overline{K}}(G)} \chi(C) \overline{\chi(D)}
+=
+\frac{|G|}{|C|} \, \delta_{CD}.
+\]
+This means the \(k\) column vectors
+\[
+\left( \chi(C) \right)_{\chi \in \operatorname{Irr}_{\overline{K}}(G)}
+\]
+are linearly independent in \(\mathbb C^h\) (they are orthogonal with nonzero lengths). Hence we must have
+\[
+k \le h. 
+\]
+
+\medskip
+\noindent\textbf{Step 3: Square and invertible.}  
+Combining Step 2 and 3, we get \(h = k\). Thus \(\mathcal T\) is a square matrix.
+
+Moreover, by Step 1, its \(h\) rows are linearly independent in \(\mathbb C^h\). A square matrix whose rows are linearly independent is invertible. Therefore \(\mathcal T\) is invertible.
+\end{proof}
+
+\begin{cor}[Orbit Correspondence]
+\label{cor:orbit_count}
+
+We get another proof of Theorem \ref{thm:count irr_conj}, i.e., 
+\[|\operatorname{Irr}_{\overline{K}}(G)|=|\operatorname{Cl}(G)|.\]
+\end{cor}
+
+
+\begin{lemma}
+\label{lem:serre_9}
+A finite group \(G\) is abelian if and only if every irreducible representation over $\overline{K}$ of \(G\) is one-dimensional.
+\end{lemma}
+
+\begin{proof}
+
+\medskip
+\noindent\textbf{(\(\Rightarrow\))} Suppose \(G\) is abelian. Let \((\rho, V)\) be an irreducible representation over $\overline{K}$ of \(G\). For any \(g \in G\), since \(G\) is abelian, \(\rho(g)\) commutes with every \(\rho(h)\) for \(h \in G\). By Lemma \ref{Schur's Lemma}, \(\rho(g)\) is a scalar operator: there exists \(\lambda_g \in \mathbb C\) such that \(\rho(g) = \lambda_g \cdot \mathrm{id}_V\). Hence every one-dimensional subspace of \(V\) is \(G\)-invariant. Since \(V\) is irreducible, \(V\) itself must be one-dimensional.
+
+\medskip
+\noindent\textbf{(\(\Leftarrow\))} Suppose every irreducible representation over $\overline{K}$ of \(G\) is one-dimensional. Since every irreducible representation has degree \(1\), by Theorem \ref{the decomposition of the regular representation}, the regular representation decomposes as
+\[
+\operatorname{reg} = \bigoplus_{\rho\in\operatorname{Irr}_{\overline{K}}(G)}\rho,
+\]
+By Corollary \ref{cor:take dim  decomposition reg} and Corollary \ref{cor:orbit_count}, taking dimensions gives
+\[
+|G| = \sum_{\rho\in\operatorname{Irr}_{\overline{K}}(G)} 1^2 = |\operatorname{Irr}_{\overline{K}}(G)|=|\operatorname{Cl}(G)|.
+\]
+Thus \(G\) is abelian.
+\end{proof}
+\begin{lemma}[Irreducible Characters of a Cyclic Group]
+\label{lem:cyclic_chars}
+Let \(C = \langle g \rangle\) be a cyclic group of order \(n\), and let \(\overline K\) be an algebraically closed field of characteristic zero. Fix a primitive \(n\)-th root of unity \(\xi \in \overline K\). Then the irreducible characters of \(C\) are exactly
+\[
+\chi_j(g^k) = \xi^{jk}, \quad \forall j \in\{ 0, 1, \dots, n-1\}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma \ref{lem:serre_9}, since \(C\) is abelian, every irreducible representation is one-dimensional. Thus an irreducible character is just a group homomorphism
+\[
+\chi : C \to \overline K^\times.
+\]
+Such a homomorphism is determined by \(\chi(g)\). Since \(g^n = 1\), we have
+\[
+\chi(g)^n = \chi(g^n) = \chi(1) = 1,
+\]
+so \(\chi(g)\) is an \(n\)-th root of unity.
+
+Because \(\overline K\) is algebraically closed of characteristic zero, the polynomial \(x^n - 1\) has exactly \(n\) distinct roots in \(\overline K\). Hence the set of \(n\)-th roots of unity is
+\[
+\mu_n(\overline K) = \{ 1, \xi, \xi^2, \dots, \xi^{n-1} \}.
+\]
+Thus for each \(j \in \{0, 1, \dots, n-1\}\), we get a character
+\[
+\chi_j(g^k) := \xi^{jk}.
+\]
+These are all distinct, and every character arises this way. Since they are one-dimensional, they are automatically irreducible.
+\end{proof}
+
+\begin{remark}[Categorical Connection]
+Let \(\mathbf{FinAb}_{p'}\) be the category whose objects are finite abelian groups of order prime to \(p\), and whose morphisms are group homomorphisms. For any algebraically closed field \(K\) of characteristic \(\ne p\), define a contravariant functor
+\[
+F_K: \mathbf{FinAb}_{p'}^{\mathrm{op}} \longrightarrow \mathbf{Ab}, \quad A \longmapsto \mathrm{Hom}(A, K^\times),
+\]
+where \(\mathrm{Hom}(A, K^\times)\) is the character group of \(A\), i.e. the set of group homomorphisms from \(A\) into \(K^\times\), with pointwise multiplication.
+
+The Teichm\"uller lift \(\tau: \overline{\mathbb F}_p^\times \to \mathbb C^\times\) induces a natural isomorphism
+\[
+\tau \circ (-): F_{\overline{\mathbb F}_p} \longrightarrow F_{\mathbb C},\quad \psi \mapsto \tau \circ \psi.
+\]
+which means for every homomorphism \(\varphi: A \to B\) in \(\mathbf{FinAb}_{p'}\), the following diagram commutes:
+\[
+\begin{CD}
+F_{\overline{\mathbb F}_p}(B) @>{\tau \circ (-)}>> F_{\mathbb C}(B) \\
+@V{F_{\overline{\mathbb F}_p}(\varphi)}VV @V{F_{\mathbb C}(\varphi)}VV \\
+F_{\overline{\mathbb F}_p}(A) @>{\tau \circ (-)}>> F_{\mathbb C}(A).
+\end{CD}
+\]
+For \(A = C_n\) (cyclic of order \(n\), \(p \nmid n\)), Lemma \ref{lem:cyclic_chars} gives the explicit form of the objects \(F_{\mathbb C}(C_n)\):
+\[
+\chi_j(g^k) = \zeta^{jk}, \quad j=0,\dots,n-1.
+\]
+The same formula holds in characteristic \(p\) with \(\omega \in \overline{\mathbb F}_p\) in place of \(\zeta\). The natural isomorphism above, via \(\tau\), identifies these two descriptions exactly:
+\[
+\psi_j(g^k)=\omega^{jk} \;\longmapsto\; (\tau\circ \psi_j)(g^k)=\tau(\omega)^{jk}.
+\]
+Thus, Lemma \ref{lem:cyclic_chars} computes the values of \(F_{\mathbb C}(C_n)\), while Teichm\"uller theory constructs the natural isomorphism \(F_{\overline{\mathbb F}_p} \cong F_{\mathbb C}\) on the entire category \(\mathbf{FinAb}_{p'}\).
+\end{remark}
+
+\begin{prop}[Galois Compatibility]
+\label{prop:galois_compat}
+
+There is a natural action of \(\Gamma\) on \(\operatorname{Cl}(G)\) such that
+\[
+(\sigma \cdot \chi)(C) = \chi(\sigma \cdot C),\quad\forall (\sigma,\chi,C)\in \Gamma\times\operatorname{Irr}_{\overline{K}}(G)\times\operatorname{Cl}(G),
+\]
+where \(\sigma \cdot \chi\) is the character defined by \[(\sigma \cdot \chi)(g) := \sigma(\chi(g)),\quad\forall g\in G.\]
+\end{prop}
+
+\begin{proof}
+
+First, suppose \(G\) is an elementary subgroup, so \(G = C \times_{grp} P\) with \(C\) cyclic of order prime to \(p\) and \(P\) a \(p\)-group. The irreducible characters of \(G\) are products of characters of \(C\) and \(P\). The Galois group \(\Gamma\) acts on the characters of \(C\) by \((\sigma\cdot\chi)(x) = \sigma(\chi(x))\), and trivially on those of \(P\). 
+
+We will prove that for every $c\in C$, there exists a unique element \(\sigma\cdot c\in C\) such that \(\chi(\sigma\cdot c) = \sigma(\chi(c))\) for all \(\chi \in \operatorname{Irr}_{\overline K}(C)\). 
+
+Let \(n = |C|\), and let \(g\) be a generator of \(C\). Fix a primitive \(n\)-th root of unity \(\xi \in \overline K\). By Lemma \ref{lem:cyclic_chars}, the irreducible characters of \(C\) are
+\[
+\chi_j(g^k) = \xi^{jk}, \quad \forall j \in\{0, 1, \dots, n-1\}.
+\]
+Since \(\sigma\) is a field automorphism, \(\sigma(\xi)\) is also a primitive \(n\)-th root of unity, so there exists a unique \(t \in (\mathbb Z/n\mathbb Z)^\times\) such that \(\sigma(\xi) = \xi^t\).
+
+Now take any \(c = g^k \in C\). Then
+\[
+\sigma(\chi_j(c)) = \sigma(\xi^{jk}) = \xi^{t j k} = \chi_j(g^{t k}).
+\]
+Thus \(c' = g^{t k}\) satisfies \(\chi_j(c') = \sigma(\chi_j(c))\) for all \(j\). This proves existence.
+
+For uniqueness, suppose \(c', c'' \in C\) both satisfy \(\chi(c') = \chi(c'')\) for all irreducible characters \(\chi\). Since the irreducible characters separate the elements of \(C\), we must have \(c' = c''\).
+
+Define $\sigma\cdot c:=c'$.
+\(C_h\) denotes the conjugacy class of \(h\) in $G$.
+
+Now we define an action of $\Gamma$ on $\operatorname{Cl}(G)$: for every \(x = cp\in G,(c,p)\in C\times P\), define \(\sigma \cdot C_x := C_{(\sigma\cdot c)  p}\). Then we have \[\chi(\sigma\cdot C_x)=\chi(C_{(\sigma\cdot c) p})=\chi
+((\sigma\cdot c)p),\] and\[(\sigma\cdot\chi)(
+C_x)=(\sigma\cdot\chi)(cp)=\sigma(\chi(c)\chi(p))=\sigma(\chi(c))\sigma(\chi(p))=\chi(\sigma\cdot c)\chi(p)=\chi((\sigma\cdot c)p).\]
+Thus the compatibility relation holds for elementary groups.
+
+
+Now let \(G\) be arbitrary. By Brauer's Theorem (Theorem \ref{Brauer's Theorem}), for every \(\chi \in \operatorname{Irr}_{\overline K}(G)\), there exist elementary subgroups \(H_i \le G\), characters \(\psi_i \in \operatorname{Irr}_{\overline K}(H_i)\), and integers \(n_i \in \mathbb Z\) such that
+\[
+\chi = \sum_{i} n_i \cdot \operatorname{Ind}_{H_i}^G(\psi_i). \tag{$*$}
+\]
+
+Fix \(\sigma \in \Gamma\) and \(C \in \operatorname{Cl}(G)\). For each \(\chi \in \operatorname{Irr}_{\overline K}(G)\), define
+\[
+v_\chi := \sigma(\chi(C)) \in \overline K.
+\]
+We claim that the vector
+\[
+v := (v_\chi)_{\chi \in \operatorname{Irr}_{\overline K}(G)} \in \overline K^{\operatorname{Irr}_{\overline K}(G)}
+\]
+is a column of the character table of \(G\).
+
+For each elementary subgroup \(H \le G\), let \(\sigma_H\) denote the action of \(\sigma\) on \(\operatorname{Cl}(H)\) constructed above. For any \(\psi \in \operatorname{Irr}_{\overline K}(H)\) and any \(h \in H\), we have
+\[
+(\sigma_H \cdot \psi)(h) = \psi(\sigma_H \cdot C_h^H),
+\]
+where \(C_h^H\) denotes the conjugacy class of \(h\) in \(H\).
+
+Now take any \(H\) in the decomposition ($*$) and any \(\psi \in \operatorname{Irr}_{\overline K}(H)\). For \(x \in G\), the induced character satisfies
+\[
+\operatorname{Ind}_H^G(\psi)(x) = \frac{1}{|H|} \sum_{\substack{g \in G \\ g^{-1}xg \in H}} \psi(g^{-1}xg).
+\]
+Applying \(\sigma\) to both sides and using (3), we obtain
+\[
+\sigma\bigl(\operatorname{Ind}_H^G(\psi)(x)\bigr)
+= \frac{1}{|H|} \sum_{\substack{g \in G \\ g^{-1}xg \in H}} (\sigma_H \cdot \psi)(g^{-1}xg)
+= \operatorname{Ind}_H^G(\sigma_H \cdot \psi)(x).
+\]
+Thus, for all \(x \in G\),
+\[
+\sigma\bigl(\operatorname{Ind}_H^G(\psi)(x)\bigr)
+= \operatorname{Ind}_H^G(\sigma_H \cdot \psi)(x). 
+\]
+
+By ($*$), for each \(\chi \in \operatorname{Irr}_{\overline K}(G)\),
+\[
+\sigma(\chi(C)) = \sum_i n_i \cdot \sigma\bigl(\operatorname{Ind}_{H_i}^G(\psi_i)(C)\bigr)
+= \sum_i n_i \cdot \operatorname{Ind}_{H_i}^G(\sigma_{H_i} \cdot \psi_i)(C),
+\]
+where the last equality follows from (4). Hence the vector \(v\) is determined by the induced characters from elementary subgroups.
+
+For each \(i\), the character \(\sigma_{H_i} \cdot \psi_i\) is an irreducible character of \(H_i\) (since \(\sigma_{H_i}\) permutes \(\operatorname{Irr}_{\overline K}(H_i)\)). By the construction on elementary subgroups, there exists a unique conjugacy class \(C_i \in \operatorname{Cl}(H_i)\) such that
+\[
+(\sigma_{H_i} \cdot \psi_i)(h) = \psi_i(C_i)
+\]
+for all \(h \in C_i\). Thus the value \(\operatorname{Ind}_{H_i}^G(\sigma_{H_i} \cdot \psi_i)(C)\) is equal to \(\operatorname{Ind}_{H_i}^G(\psi_i)(C')\) for some class \(C' \in \operatorname{Cl}(G)\) determined by \(C_i\).
+
+Therefore, there exists a unique \(C' \in \operatorname{Cl}(G)\) such that
+\[
+\sigma(\chi(C)) = \chi(C') ,\quad \forall \chi \in \operatorname{Irr}_{\overline K}(G).
+\]
+Uniqueness follows from the invertibility of the character table (Proposition \ref{prop:char_table_invertible}).
+
+Define
+\[
+\sigma \cdot C := C'.
+\]
+Then 
+\[
+\chi(\sigma \cdot C) = \sigma(\chi(C)) = (\sigma \cdot \chi)(C).
+\]
+\end{proof}
+
+\begin{defn}
+
+The orbits of the natural action of \(\Gamma\) on \(\operatorname{Cl}(G)\) are called the \textbf{\(\Gamma\)-classes} of \(G\).
+
+\end{defn}
+\begin{notation}
+Denote by  \(\operatorname{Cl}(G)/\Gamma\) the set of \(\Gamma\)-classes of \(G\).
+\end{notation}
+\begin{prop}
+Let $\chi$ be a character of $G$ over $K$. If $C,D$ are in the same \(\Gamma\)-classes $\mathcal C$, then \[\chi(C)=\chi(D).\]
+Thus, the notation \(\chi(\mathcal{C}):=\chi(C)\text{ for some } C\in \mathcal C\) is well-defined.
+\end{prop}
+\begin{proof}
+Since $C,D$ are in the same \(\Gamma\)-classes, there exists $\sigma\in \Gamma$ such that $D=\sigma \cdot C$.
+
+By Corollary \ref{cor:Artin--Wedderburn}, every finite-dimensional $K[G]$-module decomposes uniquely as a direct sum of irreducible $K[G]$-modules. Extending scalars to $\overline K$, each irreducible $K[G]$-module  decomposes further into irreducibles over $\overline K$. Therefore, any character over $K$ is a $\mathbb Z_{\ge 0}$-linear combination of absolutely irreducible characters.
+
+By Proposition \ref{prop:galois_compat}, we have \[
+(\sigma \cdot \chi_0)(C) = \chi_0(\sigma \cdot C),\quad\forall (\sigma,\chi_0,C)\in \Gamma\times\operatorname{Irr}_{\overline{K}}(G)\times\operatorname{Cl}(G).
+\]
+Then for every character over $K$ of $G$, \[
+(\sigma \cdot \chi)(C) = \chi(\sigma \cdot C),\quad\forall (\sigma,C)\in \Gamma\times\operatorname{Cl}(G).
+\]
+
+Since $\sigma\in\Gamma=\operatorname{Gal}(\overline{K}/K)$ and $\chi(C)\in K$, then $\sigma(\chi(C))=\chi(C)$.
+
+Then \[\chi(D)=\chi(\sigma\cdot C)=(\sigma\cdot \chi)(C)=\chi(C).\]
+\end{proof}
+
+\begin{defn}[Character Table over \(K\)]
+\label{def:char_table_K}
+The \textbf{character table} of \(G\) over \(K\) is the matrix
+\[
+\mathcal T_K := \bigl( \chi(\mathcal C) \bigr)_{\chi \in \operatorname{Irr}_K(G),\ \mathcal C \in \operatorname{Cl}(G)/\Gamma}.
+\]
+Its rows are indexed by the irreducible \(K\)-characters, and its columns by the \(\Gamma\)-classes of \(G\).
+\end{defn}
+
+\begin{prop}[Invertibility of the Character Table over \(K\)]
+\label{prop:char_table_invertible_K}
+The character table \(\mathcal T_K\) of \(G\) over \(K\) is an invertible square matrix.
+\end{prop}
+
+\begin{proof}
+Consider the action of $\Gamma$ on $G$.
+
+By Lemma \ref{lem:galois_orbit} and Remark \ref{rem:Decomposition of Scalars}, for each \(\chi \in \operatorname{Irr}_K(G)\), there exists a orbit
+\[
+\{\rho_1, \dots, \rho_r\} \subseteq \operatorname{Irr}_{\overline K}(G)
+\]
+and an positive integer \(m_\chi \) such that
+\[
+\chi = m_\chi \sum_{i=1}^r \rho_i. 
+\]
+Moreover, orbits\(\{\rho_1, \dots, \rho_r\}\) for distinct \(\chi \in \operatorname{Irr}_K(G)\) are disjoint and partition the set \(\operatorname{Irr}_{\overline K}(G)\).
+
+For each \(\chi \in \operatorname{Irr}_K(G)\), its row in \(\mathcal T_K\) is obtained from the rows of \(\mathcal T\) by taking the sum of the rows corresponding to the characters in \(\{\rho_1, \dots, \rho_r\}\), then multiplying by \(m_\chi\), and finally compressing columns that belong to the same \(\Gamma\)-class.
+
+\medskip
+\noindent\textbf{Step 1: Row linear independence.}  
+
+Since \(\mathcal T\) is invertible, its rows are linearly independent. The rows corresponding to the characters in an orbit \(\{\rho_1, \dots, \rho_r\}\) are linearly independent, and their sum is nonzero. Because distinct orbits are disjoint, the sums of different \(\chi \in \operatorname{Irr}_K(G)\) involve disjoint sets of rows of \(\mathcal T\). Hence these sums are linearly independent.
+
+Thus
+\[
+|\operatorname{Irr}_K(G)| \le |\operatorname{Cl}(G)/\Gamma|.
+\]
+
+\medskip
+\noindent\textbf{Step 2: Column linear independence.}  
+Since \(\mathcal T\) is invertible, the columns of \(\mathcal T\) are linearly independent. Since characters over $K$ are constant on each \(\Gamma\)-class, the columns of \(\mathcal T\) belonging to the same \(\Gamma\)-class are identical. Thus the compression map simply removes duplicate columns , and does not perform any non-trivial linear combinations. Hence the columns of \(\mathcal T_K\) are linearly independent.
+
+Thus
+\[
+|\operatorname{Cl}(G)/\Gamma| \le |\operatorname{Irr}_K(G)|.
+\]
+
+\medskip
+\noindent\textbf{Step 3: Square and invertible.}  
+Combining Step 1 and 2, we get
+\[
+|\operatorname{Irr}_K(G)| = |\operatorname{Cl}(G)/\Gamma|.
+\]
+Therefore \(\mathcal T_K\) is a square matrix. By Step1, since its rows are linearly independent, it is invertible.
+\end{proof}
+
+\begin{cor}[Orbit Correspondence]
+\label{cor:orbit_count over K}
+The number of irreducible representations of \(G\) over \(K\) equals the number of \(\Gamma\)-classes of \(G\), i.e.,
+\[
+|\operatorname{Irr}_K(G)| = |\operatorname{Cl}(G)/\Gamma|.
+\]
+\end{cor}
+
+\begin{remark}
+When \(K\) is algebraically closed, \(\Gamma = \{1\}\), so \(\Gamma\)-classes are just the ordinary conjugacy classes. The matrix \(\mathcal T_K\) reduces to $\mathcal T$, and the orbit correspondence reduces to the classical fact that the number of irreducible characters equals the number of conjugacy classes.
+\end{remark}
+
+
+
+\section{Orthogonality Relations over \(K\)}
+
+\begin{defn}
+Let \((\chi, \psi)\in \operatorname{Irr}_{K}(G)^2\). Define the \textbf{inner product} on class functions:
+\[
+\langle \chi, \psi \rangle := \frac{1}{|G|} \sum_{g \in G} \chi(g) \psi(g^{-1}).
+\]
+\end{defn}
+
+\begin{thm}[Orthogonality over \(K\)]
+\label{thm:orth}
+\begin{enumerate}
+\item For any two irreducible characters \(\chi\) and \(\psi\) over $K$,
+\[
+\langle \chi, \psi \rangle =
+\begin{cases}
+m_K(\chi)^2, & \text{if } \chi = \psi, \\
+0, & \text{if } \chi \neq \psi.
+\end{cases}
+\]
+\item For any two \(\Gamma\)-classes \(\mathcal{C}, \mathcal{D}\) of \(G\),
+\[
+\sum_{\chi \in \operatorname{Irr}_K(G)}
+\frac{\chi(\mathcal{C}) \, \overline{\chi(\mathcal{D})}}{m_K(\chi)^2}
+=
+\begin{cases}
+\dfrac{|G|}{|\mathcal{C}|}, & \text{if } \mathcal{C} = \mathcal{D}, \\[6pt]
+0, & \text{if } \mathcal{C} \neq \mathcal{D}.
+\end{cases}
+\]
+
+\end{enumerate}
+
+\end{thm}
+\begin{proof}
+(1)Take \((\chi,\psi) \in \operatorname{Irr}_K(G)^2\). By scalar extension to \(\overline K\) and Remark \ref{rem:Decomposition of Scalars}, \(\chi\) decomposes as
+\[
+\chi = m \sum_{i=1}^r \rho_i,\quad \psi = m' \sum_{j=1}^{r'} \sigma_j.
+\]
+
+Compute the inner product, we have
+\[
+\langle \chi, \psi \rangle
+= m m' \sum_{i=1}^r \sum_{j=1}^{r'} \langle \rho_i, \sigma_j \rangle.
+\]
+By Theorem \ref{Schur Orthogonality Relations}, \(\langle \rho_i, \sigma_j \rangle = \delta_{\rho_i, \sigma_j}\).
+
+If \(\chi \neq \psi\), then$\{\rho_i:i\in\{1,\dots,r\}\}$ and $\{\sigma_j:j\in\{1,\dots,r'\}\}$ are disjoint. So $\langle \rho_i, \sigma_j \rangle=0$ , then\(\langle \chi, \psi \rangle = 0\).
+
+If \(\chi = \psi\), then 
+\[
+\langle \chi, \chi \rangle =m^2\sum_{i=1}^r \sum_{j=1}^{r} \langle \rho_i, \rho_j \rangle =m^2\sum_{i=1}^r \sum_{j=1}^r \delta_{\rho_i, \rho_j}=m^2 r.
+\]
+By Lemma \ref{lem:schur_index_and_galois},
+\[
+m_K(\chi)^2 = m^2 r.
+\]
+Therefore \(\langle \chi, \chi \rangle = m_K(\chi)^2\). 
+
+(2)Let \(\mathcal T_K\) be the character table of $G$ over $K$. Define\[D:=\operatorname{diag}\{\frac{|G|}{|\mathcal{C}|}:\mathcal C\in \operatorname{Cl}(G)/\Gamma \},\quad \Delta:=\operatorname{diag}\{m_K(\chi)^2:\chi\in\operatorname{Irr}_K(G)\}.\]
+
+
+By (1), we have
+\[
+m_K(\chi)^2=\frac{1}{|G|}\sum_{g\in G}\chi(g)\overline{\chi(g)}=\sum_{\mathcal C\in \operatorname{Cl}(G)/\Gamma}\frac{|\mathcal{C}|}{|G|}\chi(\mathcal{C})\overline{\chi(\mathcal{C})},\quad\forall \chi \in\operatorname{Irr}_K(G),    
+\]and \[0=\frac{1}{|G|}\sum_{g\in G}\chi(g)\overline{\psi(g)}=\frac{|\mathcal{C}|}{|G|}\sum_{\mathcal C\in \operatorname{Cl}(G)/\Gamma}\chi(\mathcal{C})\overline{\psi(\mathcal{C})},\quad\forall (\chi,\psi) \in\operatorname{Irr}_K(G)^2 \text{ and } \chi\neq\psi.\]Then
+\[
+\mathcal T_K  \, D^{-1}\,\mathcal T_K^* =\Delta,
+\]
+where $\mathcal{T}_K^*$ is the Hermitian adjoint of $\mathcal{T}_K$.
+
+Then\[\mathcal{T}_K^*\,\Delta^{-1}\mathcal T_K=D.\]
+
+Thus
+\[
+\sum_{\chi \in \operatorname{Irr}_K(G)}
+\frac{\chi(\mathcal C) \overline{\chi(\mathcal D)}}{m_K(\chi)^2}
+=
+\frac{|G|}{|\mathcal C|} \delta_{\mathcal C,\mathcal D}.
+\]
+
+\end{proof}
+We can directly get the following corollary.
+
+\begin{cor}[Irreducibility Criterion over \(K\)]
+A character \(\chi\) of a representation over \(K\) is irreducible if and only if
+\[
+\langle \chi, \chi \rangle = m_K(\chi)^2
+.\]
+
+\end{cor}
+
+
+
+\section{Regular Representation over \(K\)}
+
+Let \(\operatorname{reg}_K\) be the regular representation of \(G\) over \(K\).
+
+\begin{thm}[Decomposition of the Regular Representation over K]
+\label{thm:reg_decomp}
+We have the following decomposition:
+\[
+\operatorname{reg}_K = \bigoplus_{\chi \in \mathrm{Irr}_K(G)} \rho_\chi^{\oplus \frac{\dim_K \rho_\chi}{m_K(\chi)}},
+\]
+where \((\rho_\chi,V_\chi)\) is the irreducible representation over $K$ with character \(\chi\), and \(m, r\) are the parameters from its scalar extension(see Remark \ref{rem:Decomposition of Scalars}).
+\end{thm}
+
+\begin{proof}
+By scalar extension to \(\overline K\), we have
+\[
+(\mathrm{reg}_K)_{\overline K} \cong \mathrm{reg}_{\overline K},
+\]
+
+By Theorem \ref{the decomposition of the regular representation}, we have
+\[
+\mathrm{reg}_{\overline K} \cong \bigoplus_{\rho } \rho^{\oplus \dim_{\overline{K}} \rho},\tag{1}
+\]where $\rho $ is absolutely irreducible representation.
+
+Now fix \(\chi \in \operatorname{Irr}_K(G)\). By Remark \ref{rem:Decomposition of Scalars}, there exists an orbit
+\[
+ \{\chi_1, \dots, \chi_{r}\} \subseteq \operatorname{Irr}_{\overline K}(G)
+\]
+and a positive integer \(m\) such that
+\[
+\chi = m_\chi \sum_{i=1}^{r_\chi} \chi_i.
+\]
+
+Let \(\rho_\chi\) be the irreducible representation over $K$ with character \(\chi\), and let \(\rho_i\) be the absolutely irreducible representation with character \(\chi_i\). Then
+\[
+(\rho_\chi)_{\overline K} \cong \bigoplus_{i=1}^{r_\chi} \rho_i^{\oplus m_\chi}. 
+\]
+
+Taking dimensions,
+\[
+\dim_K \rho_\chi =\dim_{\overline{K}}(\rho_\chi)_{\overline{K}}= m_\chi \sum_{i=1}^{r_\chi} \dim _{\overline{K}}\rho_i.
+\]
+Since all \(\rho_i\) in an orbit have the same dimension, then
+\[
+\dim _{\overline{K}}\rho_i = \frac{\dim_K \rho_\chi}{m_\chi\cdot r_\chi}. 
+\]
+
+Suppose \(\operatorname{reg}_K\) decomposes as
+\[
+\operatorname{reg}_K \cong \bigoplus_{\chi \in \operatorname{Irr}_K(G)} \rho_\chi^{\oplus n_\chi}.
+\]
+
+Scalar extension gives
+\[
+(\operatorname{reg}_K)_{\overline K}
+\cong \bigoplus_{\chi \in \operatorname{Irr}_K(G)} \big((\rho_\chi)_{\overline K}\big)^{\oplus n_\chi}
+\cong \bigoplus_{\chi \in \operatorname{Irr}_K(G)}
+\bigoplus_{i=1}^{r_\chi} \rho_i^{\oplus (m_\chi n_\chi)}.\tag{2}
+\]
+Comparing (1) and (2), we have  $m_\chi n_\chi = \dim _{\overline{K}}\rho_i = \frac{\dim_K \rho_\chi}{m_\chi\cdot r_\chi}$, then $n_\chi=\frac{\dim_K \rho_\chi}{m_\chi^2 \cdot r_\chi}=\frac{\dim_K \rho_\chi}{m_K(\chi)}$.
+
+Therefore, we return to field $K$,
+\[
+\operatorname{reg}_K \cong \bigoplus_{\chi \in \operatorname{Irr}_K(G)}
+\rho_\chi^{\oplus \frac{\dim_K \rho_\chi}{m_K(\chi)}}.
+\]
+
+\end{proof}
+
+\begin{remark}
+When \(K\) is algebraically closed, \(m_\chi = r_\chi = 1\) for every \(\chi\), so the formula reduces to the classical decomposition in Theorem \ref{the decomposition of the regular representation}.
+\end{remark}
+
+\begin{cor}[Dimension Formula]
+Taking dimensions in Theorem \ref{thm:reg_decomp},
+\[
+|G| = \sum_{\chi \in \operatorname{Irr}_K(G)}
+\frac{(\dim_K \rho_\chi)^2}{m_K(\chi)^2}.
+\]
+\end{cor}
+
+\section{Summary Table}
+
+\[
+\boxed{
+\begin{array}{c|c|c}
+\text{Property} & \text{Algebraically closed } K & \text{General } K \\
+\hline
+\text{Irreducible characters basis} & \text{All class functions} & \text{Galois-invariant class functions} \\
+\text{Schur index} & 1 & \text{May be } > 1 \\
+\text{Number of irreducibles} & \#\{\text{conjugacy classes}\} & \#\{\Gamma\text{-classes}\}\\
+\text{Orthogonality} & \langle \chi_i, \chi_j \rangle = \delta_{ij} & \langle \chi_i, \chi_j \rangle =  m_K(\chi)^2\delta_{ij} \\
+\text{Regular representation multiplicity} & \dim \rho & \dfrac{\dim_K V}{m^2 r} = \dfrac{ \dim_K V}{m_K(\chi)^2} 
+\end{array}
+}
+\]

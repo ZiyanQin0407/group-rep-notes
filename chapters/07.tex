@@ -1,0 +1,223 @@
+\chapter{Induced Representations}
+
+
+\begin{defn}[Induced Representation]
+Let \(H\) be a subgroup of group $G$, and let \((\rho, V)\) be a representation of \(H\) over a field \(K\). The \textbf{induced representation} \(\operatorname{Ind}_H^G \rho\) is the representation of \(G\) on the \(K\)-vector space
+\[
+\operatorname{Ind}_H^G V := K[G] \otimes_{K[H]} V,
+\]
+with \(G\)-action given by
+\[
+\operatorname{Ind}_H^G \theta:G\to \operatorname{GL}(\operatorname{Ind}_H^G V),\quad g\mapsto(x \otimes w\mapsto (gx) \otimes w).
+\]
+
+Equivalently, if \(G = \bigsqcup_{r \in R} rH\) is a decomposition into left cosets, where \(R \subseteq G\) be a set of representatives for the left cosets \(G/H\), then
+\[
+\operatorname{Ind}_H^G V \cong \bigoplus_{r \in R} (r \otimes V),
+\]
+where each \(r \otimes V\) is a copy of \(V\), and \(G\) acts by permuting these coset summands:
+\[
+g \cdot (r \otimes v) = r' \otimes (\rho(h) v), \quad \text{where } gr = r'h.
+\]
+This is the \textbf{coset realization} of the induced representation. The equivalence follows from the fact that \(K[G]\) is free as a right \(K[H]\)-module with basis \(R\).
+
+
+\end{defn}
+
+\begin{remark}
+Tensor product of representations and induced representations are both constructed via tensor products, but they are different operations:
+
+\begin{itemize}
+    \item The tensor product \(V \otimes_K W\) of two \(G\)-representations gives a \(G\)-representation by \(g \cdot (v \otimes w) = (gv) \otimes (gw)\).
+    \item The induced representation \(\operatorname{Ind}_H^G V = K[G] \otimes_{K[H]} V\) gives a \(G\)-representation by \(g \cdot (x \otimes v) = (gx) \otimes v\); the subscript \(K[H]\) ensures that the \(H\)-action is compatible with the left \(H\)-action on \(V\).
+\end{itemize}
+
+In particular, the tensor product representation constructs a new representation from two representations of the same group, while the induced representation constructs a representation of a larger group from a representation of a subgroup.
+\end{remark}
+We first present some property of induced representations.
+
+\begin{prop}[Universal property]
+\label{Universal property}
+Let \(H\) be a subgroup of group $G$. Let \((\rho_V, V)\) be a representation of \(G\) and \((\rho_W, W)\) be a representation of \(H\), and let \(f: W \to V\) be an \(H\)-equivariant mapping. Then there exists a unique \(G\)-equivariant mapping \(F: \operatorname{Ind}_H^G W \to V\) extending \(f\).
+\end{prop}
+
+\begin{proof}
+For every \(x = \sum_{r\in R} r\otimes w_r\in \operatorname{Ind}_H^G W\) where \(R \subseteq G\) be a set of representatives for the left cosets \(G/H\), define \[F(x) = \sum_{r\in R} \rho_V(r) f(w_r).\]
+To prove \(G\)-equivariance of \(F\), it suffices to check on generators \(r \otimes w\).
+
+For \(g \in G\), write \(gr = r' h\) with \(r' \in R\), \(h \in H\). Then 
+\[
+F(g \cdot (r \otimes w)) = F(gr \otimes w) = F(r' h \otimes w) = F(r' \otimes h w) = \rho_V(r') f(h w).
+\]
+On the other hand,
+\[
+g \cdot F(r \otimes w) = \rho_V(g) \rho_V(r) f(w) = \rho_V(gr) f(w) = \rho_V(r' h) f(w) = \rho_V(r') \rho_V(h) f(w).
+\]
+By \(H\)-equivariance of \(f\), \(\rho_V(h) f(w) = f(h w)\). Hence both sides are equal.
+
+Thus \(F(g \cdot (r \otimes w)) = g \cdot F(r \otimes w)\) for all generators. By linearity, \(F(g \cdot x) = g \cdot F(x)\) for all \(x \in \operatorname{Ind}_H^G W\).
+
+Suppose \(F_1, F_2: \operatorname{Ind}_H^G W \to V\) are two \(G\)-equivariant extensions of \(f\). For any \(r \in R\), \(w \in W\):
+\[
+F_i(r \otimes w) = F_i(r \cdot (1 \otimes w)) = r \cdot F_i(1 \otimes w) = r \cdot f(w), \quad \forall i \in \{1, 2\}.
+\]
+Thus \(F_1(r \otimes w) = F_2(r \otimes w)\) for all generators. Since these span \(\operatorname{Ind}_H^G W\), we have \(F_1 = F_2\).
+\end{proof}
+
+\begin{remark}
+The definition constructs \(\operatorname{Ind}_H^G \theta\); the universal property (Proposition \ref{Universal property}) says it is the unique \(G\)-representation 
+with the property that \(H\)-equivariant maps out of \(W\) correspond bijectively to \(G\)-equivariant maps out of \(\operatorname{Ind}_H^G W\).
+\end{remark}
+
+\begin{prop}[Transitivity]
+If \(H \le G \le L\), then
+\[
+\operatorname{Ind}_G^L (\operatorname{Ind}_H^G W) \cong \operatorname{Ind}_H^L W.
+\]
+\end{prop}
+
+\begin{proof}
+By tensor product associativity:
+\[
+K[L] \otimes_{K[G]} (K[G] \otimes_{K[H]} W) \cong (K[L] \otimes_{K[G]} K[G] )\otimes_{K[H]} W \cong K[L] \otimes_{K[H]} W.
+\]
+\end{proof}
+
+\begin{prop}
+Let \(H\) be a subgroup of group $G$, and let \(G\) act on \(G/H\) by left multiplication. Then 
+\[
+K[G/H] \cong \operatorname{Ind}_H^G \mathbf{1}.
+\]
+\end{prop}
+
+\begin{proof}
+Let \( R \subseteq G \) be a set of representatives for the left cosets \( G/H \). Define
+\[
+\Phi: K[G/H] \to \operatorname{Ind}_H^G \mathbf{1}, \text{ satisfying } e_{rH} \mapsto r \otimes 1,
+\]
+and extend linearly.
+
+\medskip
+\noindent
+Well-defined: \( e_{rhH} = e_{rH} \) and \( rh \otimes 1 = r \otimes (h \cdot 1) = r \otimes 1 \).
+
+\medskip
+\noindent
+\( G \)-equivariant: for \( g \in G \), write \( gr = r' h \). Then
+\[
+\Phi(g \cdot e_{rH}) = \Phi(e_{grH}) = \Phi(e_{r'H}) = r' \otimes 1 = g \cdot (r \otimes 1) = g \cdot \Phi(e_{rH}).
+\]
+
+\medskip
+\noindent
+Bijective: \( \Phi \) maps the basis \( \{e_{rH}\} \) bijectively to the basis \( \{r \otimes 1\} \).
+
+Hence \( \Phi \) is a \( G \)-equivariant isomorphism.
+\end{proof}
+\begin{prop}[Character Formula for Induced Representations]
+\label{Character Formula for Induced Representations}
+Let \(H\) be a subgroup of group $G$ and let \((\theta, W)\) be a representation of \(H\). Then 
+\[
+\chi_{\operatorname{Ind}_H^G \theta}(g) = \frac{1}{|H|} \sum_{\substack{x \in G \\ x^{-1}gx \in H}} \chi_\theta(x^{-1}gx).
+\]
+\end{prop}
+\begin{proof}
+Let \(R \subseteq G\) be a set of representatives for the left cosets \(G/H\). Then
+\[
+\operatorname{Ind}_H^G W = \bigoplus_{r \in R} (r \otimes W
+),
+\]
+and each \(r \otimes W\) is a copy of \(W\). For fixed \(g \in G\), write \(gr = r' h\) with \(r' \in R\), \(h \in H\). Then
+\[
+g \cdot (r \otimes w) = r' \otimes \theta(h) w.
+\]
+In the basis adapted to this direct sum, the matrix of \(\rho_{\operatorname{Ind}_H^G \theta}(g)\) is block-upper triangular with diagonal blocks only for those \(r\) with \(r' = r\) (i.e., \(r^{-1}gr \in H\)). Each such diagonal block is the matrix of \(\theta(h)\), hence contributes \(\chi_\theta(h)\). Therefore
+\[
+\chi_{\operatorname{Ind}_H^G \theta}(g) = \sum_{\substack{r \in R \\ r^{-1}gr \in H}} \chi_\theta(r^{-1}gr).
+\]
+Since every \(x \in G\) with \(x^{-1}gx \in H\) lies in exactly \(|H|\) left cosets, we may average over all \(x \in G\):
+\[
+\chi_{\operatorname{Ind}_H^G \theta}(g) = \frac{1}{|H|} \sum_{\substack{x \in G \\ x^{-1}gx \in H}} \chi_\theta(x^{-1}gx).
+\]
+\end{proof}
+\begin{notation}
+$\operatorname{Ind}_H^G \chi_\theta:=\chi_{\operatorname{Ind}_H^G \theta} $
+\end{notation}
+
+Next, we present some theorems about restriction (see Definition \ref{def:Restriction}) and induced representations, and last one reveals the relationships of tensor product of representations and induced representations .
+
+\begin{defn}[Restriction]
+\label{def:Restriction}
+Let \(H \le G\) and let \((\rho, V)\) be a representation of \(G\). 
+The \textbf{restriction} of \(\rho\) to \(H\), denoted \(\operatorname{Res}_H^G \rho\), is the representation of \(H\) on \(V\) defined by
+\[
+(\operatorname{Res}_H^G \rho)(h) = \rho(h), \quad \forall h \in H.
+\]
+
+In module language, if \(V\) is a \(K[G]\)-module, then \(\operatorname{Res}_H^G V\) is the same abelian group \(V\) viewed as a \(K[H]\)-module by restricting the action from \(K[G]\) to the subalgebra \(K[H]\).
+
+Without causing confusion, we can write $\operatorname{Res}_H^G \rho$ as $\rho|_H$.
+\end{defn}
+\begin{prop}
+\label{prop:ind eq ind res}
+Let \(H \le G\), and let \((\chi,V)\) be a representation of $G$ and \((\theta,W)\) a representation of $H$. Then
+\[
+\operatorname{Ind}_H^G \theta \cdot \chi = \operatorname{Ind}_H^G (\theta \cdot \operatorname{Res}_H^G \chi).
+\]
+\end{prop}
+
+\begin{proof}
+Let \(R \subseteq G\) be a set of representatives for the left cosets \(G/H\). For \(s \in G\), by Proposition \ref{Character Formula for Induced Representations},
+\[
+(\operatorname{Ind}_H^G \theta \cdot \chi)(s)
+= \sum_{\substack{r \in R \\ r^{-1}sr \in H}} \theta(r^{-1}sr) \cdot \chi(s)
+= \sum_{\substack{r \in R \\ r^{-1}sr \in H}} \theta(r^{-1}sr) \cdot \chi(r^{-1}sr)
+= \operatorname{Ind}_H^G (\theta \cdot \operatorname{Res}_H^G \chi)(s).
+\]
+\end{proof}
+\begin{thm}[Frobenius Reciprocity]\label{Frobenius Reciprocity}
+Let \(H \le G\), and let \((\rho_1,V)\) be a representation of $G$ and \((\rho_2,W)\) a representation of $H$. There is a natural isomorphism
+\[
+\operatorname{Hom}_G(\operatorname{Ind}_H^G W, V) \cong \operatorname{Hom}_H(W, \operatorname{Res}_H^G V).
+\]
+Equivalently,
+\[
+\frac{1}{|H|} \sum_{h \in H} \chi_2(h) \overline{\chi_{\operatorname{Res}_H^G \rho_1}(h)}
+=
+\frac{1}{|G|} \sum_{g \in G} \chi_{\operatorname{Ind}_H^G \rho_2}(g) \overline{\chi_1(g)}.
+\]
+\end{thm}
+
+\begin{proof}
+\[
+\begin{aligned}
+\operatorname{Hom}_G(K[G] \otimes_{K[H]} W, V)
+&\cong \operatorname{Hom}_{K[H]}(W, \operatorname{Hom}_G(K[G], V)) \\
+&\cong \operatorname{Hom}_{K[H]}(W, \operatorname{Res}_H^G V).
+\end{aligned}
+\]
+The last isomorphism is given by \(f \mapsto f(1)\).
+\end{proof}
+
+
+\begin{thm}[Tensor Product--Induction Adjunction]\label{Tensor Product--Induction Adjunction}
+Let \((\rho_1,V)\) be a representation of $G$ and \((\rho_2,W)\) a representation of $H$. Then
+\[
+\operatorname{Ind}_H^G( \operatorname{Res}_H^G V \otimes_K W ) \cong V \otimes_K \operatorname{Ind}_H^G W.
+\]
+\end{thm}
+
+\begin{proof}
+\[
+\begin{aligned}
+\operatorname{Ind}_H^G( \operatorname{Res}_H^G V \otimes_K W )
+&= K[G] \otimes_{K[H]} (V \otimes_K W) \\
+&\cong (K[G] \otimes_{K[H]} W) \otimes_K V \\
+&\cong \operatorname{Ind}_H^G W \otimes_K V \\
+&\cong V \otimes_K \operatorname{Ind}_H^G W.
+\end{aligned}
+\]
+The isomorphism is natural and respects the \(G\)-actions.
+
+\end{proof}
+

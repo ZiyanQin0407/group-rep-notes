@@ -1,0 +1,92 @@
+
+\chapter{Characters}
+
+In the representation theory of finite groups, a \textbf{representation} \((\rho, V)\) assigns to each element \(g\) of a group \(G\) an invertible linear transformation \(\rho(g)\) on a vector space \(V\). While this provides a concrete way to study abstract groups via matrices, working directly with these matrix representations can be cumbersome. The matrices depend heavily on the choice of basis, and operations such as direct sums, tensor products, and symmetric powers require intricate manipulation of block matrices and invariant subspaces.
+
+To overcome these computational and conceptual hurdles, we introduce the notion of the \textbf{character} of a representation. We first introduce a more general concept, \textbf{class function}.
+
+
+
+\begin{defn}
+A function \( f: G \to \mathbb{C} \) is called a \textbf{class function} if 
+\[
+f(t s t^{-1}) = f(s), \quad \forall( s, t) \in G^2.
+\]
+
+\end{defn}
+
+\begin{defn}[Character]\label{def:Character}
+Let \((\rho, V)\) be a finite-dimensional representation of a finite group \(G\) over a field \(K\). The \textbf{character} of \(\rho\) is the function
+\[
+\chi_\rho: G \to K, \qquad g\mapsto \mathrm{tr}(\rho(g)).
+\]
+
+Sometimes, we write $\chi_\rho$ simply as $\chi$.
+\end{defn}
+
+\begin{remark}
+If \(\rho\) is a permutation representation (see Definition \ref{Permutation Representation}) associated to a finite set \(X\) acted by a group $G$, then for each \(g \in G\),
+\[
+\chi_\rho(g) = \#\{x \in X : gx = x\}.
+\]
+That is, the character at \(g\) counts the number of fixed points of \(g\) on \(X\).
+\end{remark}
+
+\begin{exmp}
+Let \(G\) be a group. The \textbf{trivial representation} of \(G\) is the homomorphism
+\[
+\mathbf{1}_G: G \to \mathbb{C}^\times, \qquad g\mapsto 1.
+\]
+Its character is the \textbf{trivial character}, denoted also by \( \mathbf{1}_G \) or \( \chi_{\mathrm{triv}} \), given by
+\[
+\chi_{\mathrm{triv}}(g) = 1 ,\quad \forall g \in G.
+\]
+\end{exmp}
+
+\begin{prop}
+\label{prop:linenear cha}
+Characters satisfy the following properties
+\begin{enumerate}
+\item \(\chi_\rho(e) = \dim V\).
+\item \(\chi_\rho(hgh^{-1}) = \chi_\rho(g),\forall (g,h)\in G^2\), i.e., every character is a class function.
+\item \(\chi_\rho(g^{-1}) = \overline{\chi_\rho(g)},\forall g\in G\).
+\end{enumerate}
+\end{prop}
+\begin{proof}[Proof Sketch]
+1 and 2 are trivial. Now We prove 3. Since $G$ is finite, every \(g \in G\) has finite order, so \(\rho(g)\) is diagonalizable with eigenvalues that are roots of unity. Hence \(\lambda^{-1} = \overline{\lambda}\) for each eigenvalue, and taking traces gives the result.
+\end{proof}
+Since every character is a class function, we can define the character of a conjugacy class in a finite group.
+\begin{notation}
+Let $C$ be a conjugacy class of a finite group $G$. \[\chi_\rho(C)
+:= \chi_\rho(g),\quad\forall g\in C.\]
+\end{notation}
+
+By knowledge of linear algebra, we can easily prove the following two propositions.
+
+\begin{prop}
+\label{prop:add_mul cha}
+Let \((\rho_1,V_1)\) and \((\rho_2,V_2)\) be two linear representations of a finite group \(G\), with characters \(\chi_1\) and \(\chi_2\), respectively. Then:
+
+\begin{enumerate}
+    \item The character \(\chi\) of the direct sum representation \(V_1 \oplus V_2\) is
+    \[
+    \chi = \chi_1 + \chi_2.
+    \]
+    \item The character \(\psi\) of the tensor product representation \(V_1 \otimes V_2\) is
+    \[
+    \psi = \chi_1 \cdot \chi_2.
+    \]
+\end{enumerate}
+\end{prop}
+\begin{prop}\label{prop:sym_alt cha}
+Let \((\rho,V)\) be a linear representation of a finite group \(G\), with character \(\chi\). Let \(\chi_\sigma^2\) denote the character of the symmetric square \(\operatorname{Sym}^2(V)\), and let \(\chi_\alpha^2\) denote the character of the alternating square \(\operatorname{Alt}^2(V)\). Then for each \(g \in G\),
+\[
+\chi_\sigma^2(g) = \frac{1}{2} \left( \chi(g)^2 + \chi(g^2) \right),
+\qquad
+\chi_\alpha^2(g) = \frac{1}{2} \left( \chi(g)^2 - \chi(g^2) \right).
+\]
+In particular,
+\[
+\chi_\sigma^2 + \chi_\alpha^2 = \chi^2.
+\]
+\end{prop}

@@ -1,0 +1,149 @@
+\chapter{Schur's Lemma and Orthogonality Relations}
+In the representation theory of finite groups, Schur's Lemma and the Orthogonality Relations stand as the two most fundamental pillars of the subject. If "characters" are the most powerful computational tools in representation theory, then these two theorems provide the underlying algebraic laws that make those tools work. 
+
+Schur's Lemma establishes the fundamental rigidity of irreducible representations, proving that any map commuting with the group action between them is either zero or an isomorphism, and that their self-maps are simply scalar multiplications. Building on this foundation, the Orthogonality Relations provide the essential computational machinery by equipping characters with an inner product, allowing any representation to be effortlessly decomposed into its irreducible building blocks.
+
+
+\begin{lemma}[Schur's Lemma]\label{Schur's Lemma}
+Let \((\rho_1 ,V)\) and \((\rho_2 ,W)\) be irreducible representations over a field \(K\). If  \(T : V \to W\) is a \(G\)-equivariant linear mapping, i.e.,
+\[
+T \rho_1(g) = \rho_2(g) T \quad \text{for all } g \in G,
+\]
+then
+\begin{enumerate}
+\item If \(\rho_1 \not\cong \rho_2\), then \(T = 0\).
+\item If \(\rho_1 \cong \rho_2\), then every nonzero \(G\)-equivariant linear mapping is an isomorphism.
+
+In particular, if \(\rho_1 = \rho_2\) and \(K\) is algebraically closed, then \(T = \lambda I_V\) for some \(\lambda \in K\).
+\end{enumerate}
+
+\end{lemma}
+
+\begin{proof}
+The kernel \(\ker T \subseteq V\) is \(G\)-invariant, since if \(v \in \ker T\), then
+\[
+T \rho_1(g) v = \rho_2(g) T v = 0.
+\]
+By irreducibility, \(\ker T\) is either \(0\) or \(V\). Similarly, the image \(\operatorname{im} T \subseteq W\) is \(G\)-invariant, hence either \(0\) or \(W\).
+
+If \(\rho_1 \not\cong \rho_2\),since $T$ cannot be an isomorphism, then \(\operatorname{im}T=0\). Thus $T=0$ .
+
+
+
+If \(\rho_1 \cong \rho_2\) and \(T \neq 0\), then  $\operatorname{im}T=W\cong V$. Thus \(T\) is an isomorphism. 
+
+Then we suppose \(\rho_1 = \rho_2\) and \(K\) is algebraically closed. Over an algebraically closed field, \(T\) has an eigenvalue \(\lambda\). Then \(T - \lambda I\) is a \(G\)-equivariant map with nonzero kernel, hence by irreducibility it must be zero. Therefore \(T = \lambda I\).
+\end{proof}
+\begin{lemma}[Schur's Lemma, module form]
+\label{Schur's Lemma, module form}
+Let \(A\) be a \(K\)-algebra and let \(S, T\) be simple \(A\)-modules.
+\begin{enumerate}
+    \item If \(S \not\cong T\), then \(\operatorname{Hom}_A(S, T) = 0\).
+   \item If \(S \cong T\), then every nonzero \(A\)-homomorphism \(f: S \to T\) is an isomorphism.
+
+In particular, if \(S = T\), then \(\operatorname{Hom}_A(S, S)=:\operatorname{End}_A(S)\) is a division ring. 
+Moreover, if \(K\) is algebraically closed, then
+    \[
+    \operatorname{End}_A(S) \cong K.
+    \]
+\end{enumerate}
+\end{lemma}
+
+
+
+\begin{remark}
+
+\begin{itemize}
+    \item \(\operatorname{char} K \nmid |G|\) ensures semisimplicity (Maschke's theorem): every representation is a direct sum of irreducibles.
+    \item \(K\) algebraically closed ensures Schur's lemma holds in its strong form: every endomorphism of an irreducible representation is a scalar multiple of the identity.
+\end{itemize}
+If either condition fails, the orthogonality relations require modification, which we will discuss in Section 10-11.
+
+For convenience, \textbf{we take the algebraically closed field $K=\mathbb{C}$ with \(\operatorname{char} K \nmid |G|\), and finite group $G$  in Section 4-9.}
+
+\end{remark}
+
+
+\begin{thm}[The First Orthogonality Relation]
+\label{Schur Orthogonality Relations}
+
+Let \(\chi_i, \chi_j\) be characters of complex irreducible representations of \(G\). Then
+\[
+\frac{1}{|G|} \sum_{g \in G} \chi_i(g) \overline{\chi_j(g)} = \delta_{ij}.
+\]
+\end{thm}
+
+\begin{proof}
+Let \(V_i, V_j\) be the corresponding representation spaces with characters \(\chi_i, \chi_j\). For any linear map \(A : V_j \to V_i\), define
+\[
+T = \frac{1}{|G|} \sum_{g \in G} \rho_i(g) \, A \, \rho_j(g)^{-1}.
+\]
+Then \(T\) is \(G\)-equivariant:
+\[
+\rho_i(h) T \rho_j(h)^{-1}
+= \frac{1}{|G|} \sum_{g \in G} \rho_i(hg) A \rho_j((hg)^{-1})
+= T.
+\]
+By Lemma \ref{Schur's Lemma}:
+\begin{itemize}
+\item If \(i \neq j\), then \(T = 0\). Taking traces gives
+\[
+0 = \operatorname{tr}(T) = \frac{1}{|G|} \sum_{g \in G} \operatorname{tr}(\rho_i(g) A \rho_j(g)^{-1}).
+\]
+Since the trace is cyclic, \(\operatorname{tr}(\rho_i(g) A \rho_j(g)^{-1}) = \operatorname{tr}(A \rho_j(g)^{-1} \rho_i(g))\). Choosing \(A\) with a single nonzero matrix entry allows us to isolate the orthogonality relation for the matrix coefficients, and summing over \(i,j\) gives the character orthogonality.
+\item If \(i = j\), then \(T = \lambda I\) with
+\[
+\lambda = \frac{\operatorname{tr}(A)}{\dim V_i}.
+\]
+Taking traces yields
+\[
+\frac{1}{|G|} \sum_{g \in G} \chi_i(g) \overline{\chi_i(g)} = 1.
+\]
+\end{itemize}
+
+\end{proof}
+
+\begin{cor}
+\label{number of decomposition}
+Let $V = W_1 \oplus \cdots \oplus W_k$ be a decomposition into complex irreducibles, with character $\phi$, where the character of $W_i$ is $\chi_i$ for each $i$. If $W$ is irreducible with character $\chi$, then the number of $W_i$ isomorphic to $W$ is
+\[
+\frac{1}{|G|} \sum_{g \in G} \phi(g) \overline{\chi(g)}.
+\]
+\end{cor}
+
+\begin{proof}
+$\phi = \sum_i \chi_i \implies \frac{1}{|G|} \sum_g \phi(g) \overline{\chi(g)} = \sum_i \frac{1}{|G|} \sum_g \chi_i(g) \overline{\chi(g)} = \#\{i : W_i \cong W\}$.
+\end{proof}
+
+\begin{cor}\label{cor:Schur eq and irreducible}
+
+\begin{enumerate}
+\item Let $(\rho_1,V)$ and $(\rho_2,W)$ be linear complex representations of $G$. Then $\chi_{\rho_1}= \chi_{\rho_2} \iff \rho_1\cong \rho_2.$
+
+    \item Let $V = W_1 \oplus \cdots \oplus W_k$ be a decomposition into complex irreducibles, with character $\phi$, where the character of $W_i$ is $\chi_i$ for each $i$. Then $V$ irreducible $\iff \frac{1}{|G|} \sum_g |\phi(g)|^2 = 1$.
+\end{enumerate}
+\end{cor}
+
+\begin{proof}
+\begin{enumerate}
+    
+\item If \(\rho_1 \cong \rho_2\), then for each \(g \in G\),
+\[
+\chi_{\rho_2}(g) = \operatorname{tr}(\rho_2(g)) = \operatorname{tr}(T \rho_1(g) T^{-1}) = \operatorname{tr}(\rho_1(g)) = \chi_{\rho_1}(g).
+\]
+
+Conversely, suppose $\chi_1 = \chi_2$. Write $\rho_1 = \oplus_i m_i \rho_i$ and $\rho_2 = \oplus_i n_i \rho_i$ as direct sums of irreducibles. Then $\chi_1 = \sum_i m_i \chi_i$ and $\chi_2 = \sum_i n_i \chi_i$. By orthogonality,
+\[
+m_i = \frac{1}{|G|} \sum_{g \in G} \chi_1(g) \overline{\chi_i(g)}
+= \frac{1}{|G|} \sum_{g \in G} \chi_2(g) \overline{\chi_i(g)}
+= n_i.
+\]
+Thus $\rho_1 \cong \rho_2$.
+
+
+
+\item $\phi = \sum m_i \chi_i \implies \frac{1}{|G|} \sum_g |\phi(g)|^2 = \sum m_i^2$. This equals $1$ iff exactly one $m_i = 1$ and the rest are $0$.
+
+
+\end{enumerate}
+\end{proof}

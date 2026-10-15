@@ -1,0 +1,92 @@
+\chapter{Counting Irreducibles}
+
+\begin{thm}[Artin--Wedderburn, algebraically closed case]
+\label{Artin--Wedderburn, algebraically closed case}
+Let \(A\) be a finite-dimensional semisimple algebra over an algebraically closed field \(K\). Then
+\[
+A \cong \bigoplus_{i=1}^r M_{n_i}(K)
+\]
+for some positive integers \(n_1, \dots, n_r\). The number \(r\) equals the number of isomorphism classes of simple \(A\)-modules.
+\end{thm}
+
+\begin{proof}
+Let \(S_1, \dots, S_r\) be the distinct simple \(A\)-modules.
+
+
+Define
+\[
+\phi: A \to \bigoplus_{i=1}^r \operatorname{End}_K(S_i), \quad a\mapsto(L_a^{(i)}: S_i\to S_i,\quad x\mapsto ax)_{i\in \{1,\dots,r\}},
+\]
+where $\operatorname{End}_K(S_i): = \{ T: S_i\to S_i \mid T \text{ is } K\text{-linear} \}$.
+
+If \(a \in \ker \phi\), then \(aS_i=\{0\},\forall i\in \{1,\dots, r\}\) . Since $A$ is semisimple, \(A \cong \bigoplus_{j=1}^r S_j^{\oplus m_j}\) as a left \(A\)-module. Then \(aA=\{0\}\), hence \(a = a\cdot1=0\). So \(\phi\) is injective.
+
+Take $\operatorname{End}$ on both side of \(A \cong \bigoplus_{j=1}^r S_j^{\oplus m_j}\), then we have
+\[
+\operatorname{End}_A(A)^{\mathrm{op}} \cong \operatorname{End}_A(\bigoplus_{j=1}^r S_j^{\oplus m_j})^{\mathrm{op}}\cong\bigoplus_{i,j} \operatorname{Hom}_A(S_i^{\oplus m_i}, S_j^{\oplus m_j})\cong\bigoplus_{i,j} \operatorname{Hom}_A(S_i, S_j)^{\oplus m_i m_j}.
+\]
+By Lemma\ref{Schur's Lemma, module form}, \(\operatorname{Hom}_A(S_i, S_j) = 0\) for \(i \neq j\), and \(\operatorname{Hom}_A(S_i, S_i) \cong K\). Thus
+\[
+\operatorname{End}_A(A)^{\mathrm{op}} \cong \bigoplus_{i=1}^r M_{m_i}(K).
+\]
+And since \(\operatorname{End}_A(A)^{\mathrm{op}} \cong A\), we have
+\[
+A \cong \bigoplus_{i=1}^r M_{m_i}(K).
+\]
+
+
+For each \(i\), the simple module of \(M_{m_i}(K)\) is \(K^{m_i}\), which has dimension \(m_i\). Since \(S_i\) is this simple module, we have
+\[
+ \dim_K S_i = m_i.
+\]Therefore
+\[
+A \cong \bigoplus_{i=1}^r M_{ \dim_K S_i}(K).
+\]
+Finally, \(r\) is the number of simple modules, hence the number of irreducible representations.
+\end{proof}
+
+\begin{cor}
+\label{cor:Artin--Wedderburn}
+If \(G\) is finite, \(K\) algebraically closed, and \(\operatorname{char} K \nmid |G|\), then
+\[
+K[G] \cong \bigoplus_{\rho \in \mathrm{Irr}(G)} M_{\dim \rho}(K).
+\]
+\end{cor}
+
+\begin{proof}
+By Theorem \ref{Maschke's Theorem, algebra form}, \(K[G]\) is semisimple. Apply Theorem \ref{Artin--Wedderburn, algebraically closed case}.
+\end{proof}
+
+\begin{thm}\label{thm:count irr_conj}
+\[
+|\mathrm{Irr}(G)| = \#\{\text{conjugacy classes of } G\}.
+\]
+\end{thm}
+
+\begin{proof}
+Let \(Z := Z(K[G])\). On one hand, take a conjugacy $\mathcal{C}$ of $G$, then for every $h\in G$, we have \[h\left(\sum_{g \in \mathcal{C}} g\right)h^{-1}=\sum_{g \in \mathcal{C}} hgh^{-1}=\sum_{g \in \mathcal{C}} g.\]
+Then $\sum_{g \in \mathcal{C}} g\in Z$.
+
+Suppose $z=\sum_{g \in G} a_g g\in Z$.
+Then $z=\sum_{g \in G} a_g g=\sum_{g \in G} a_g hgh^{-1},\forall h\in G$.
+Then $a_g=a_{hgh^{-1}}$.
+Therefore, $z=\sum_{ \mathcal{C}}a _{\mathcal{C}}\left(\sum_{g \in \mathcal{C}} g\right)$, where $a_{\mathcal{C}}$ is the common coefficients of the conjugacy class $\mathcal{C}$. \(\{\sum_{g \in \mathcal{C}} g : \mathcal{C} \text{ a conjugacy class}\}\) are linearly independent since conjugacy classes are disjoint. 
+
+Hence \(Z\) has basis \(\{\sum_{g \in \mathcal{C}} g : \mathcal{C} \text{ a conjugacy class}\}\), so
+\[
+\dim Z = \#\{\text{conjugacy classes}\}.
+\]
+On the other hand, by Corollary \ref{cor:Artin--Wedderburn},
+\[
+K[G] \cong \bigoplus_{\rho \in \mathrm{Irr}(G)} M_{\dim \rho}(K),
+\]
+Taking $Z(\cdot)$ on both side, we get
+\[
+Z \cong \bigoplus_{\rho \in \mathrm{Irr}(G)} Z(M_{\dim \rho}(K)) =\bigoplus_{\rho \in \mathrm{Irr}(G)} \{\lambda I_
+{\operatorname{dim}\rho}:\lambda \in K\}\cong \bigoplus_{\rho \in \mathrm{Irr}(G)} K,
+\]
+hence
+\[
+\dim Z = |\mathrm{Irr}(G)|.
+\]
+\end{proof}

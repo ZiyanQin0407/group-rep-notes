@@ -1,0 +1,233 @@
+\chapter{Regular Representation}
+
+\begin{defn}[Permutation Representation]
+\label{Permutation Representation}
+Let \(G\) be a finite group acting on a finite set \(X\).  
+The \textbf{permutation representation} of \(G\) on \(X\) is the representation on the vector space \(K[X]\) with basis \(\{e_x : x \in X\}\), defined by left action:
+
+\[
+\rho : G \to \mathrm{GL}(K[X]), \qquad 
+g\mapsto\left(\sum_{x \in X} a_x x \mapsto \sum_{x \in X} a_x (gx)\right).
+\]
+
+Equivalently, on the basis \(\{e_x : x \in X\}\), we have
+
+\[
+\rho(g)(e_x) = e_{gx}.
+\]
+\end{defn}
+
+
+\begin{defn}[Left Regular Representation]
+Let \(G\) be a finite group and \(K[G]\) its group algebra. 
+The \textbf{left regular representation} of \(G\) is the representation on the vector space \(K[G]\) defined by left multiplication:
+\[
+\operatorname{reg}: G \to \mathrm{GL}(K[G]), \qquad 
+g\mapsto\left(\sum_{h \in G} a_h h \mapsto \sum_{h \in G} a_h (gh)\right).
+\]
+Equivalently, on the basis \(\{e_h : h \in G\}\), we have
+\[
+\operatorname{reg}(g)(e_h) = e_{gh}.
+\]
+
+(Resp. right regular representation $\operatorname{reg'}$)
+
+The dimension of this representation is \(|G|\).
+\end{defn}
+
+
+\begin{remark}
+When \(X = G\) with \(G\) acting by left multiplication, the permutation representation is precisely the left regular representation.
+
+The left regular representation is faithful: distinct group elements act as distinct linear transformations. 
+
+The left and right regular representation are isomorphic:
+Define
+\[S: K[G]\to K[G],\quad\sum_{h \in G} a_h h \mapsto\sum_{h \in G} a_h h ^{-1}.\]
+Then we have \[S \operatorname{reg}(g)=\operatorname{reg'}(g)S\]
+
+\end{remark}
+
+\begin{prop}
+\[
+\chi_{\operatorname{reg}}(e) = |G|, \qquad \chi_{\operatorname{reg}}(g) = 0 \quad (g \neq e).
+\]
+\end{prop}
+
+\begin{proof}
+The first one is trivial. For \(g \neq e\), left multiplication by \(g\) has no fixed points.
+\end{proof}
+
+\begin{thm}
+\label{the decomposition of the regular representation}
+Let $G$ be a finite group. Then \[
+\mathrm{reg} = \bigoplus_{\rho \in \mathrm{Irr}(G)} \rho^{\oplus \dim \rho},
+\]
+where $\operatorname{Irr}(G)$ is the set of irreducible complex representations of $G$
+\end{thm}
+
+\begin{proof}
+\[
+\frac{1}{|G|} \sum_{g \in G} \chi_{\mathrm{reg}}(g) \overline{\chi_\rho(g)}
+= \overline{\chi_\rho(e)}=\chi_\rho(e)
+= \dim \rho.
+\]
+Then by Corollary \ref{number of decomposition}, we have \[
+\mathrm{reg} = \bigoplus_{\rho \in \mathrm{Irr}(G)} \rho^{\oplus \dim \rho}.
+\]
+\end{proof}
+
+\begin{cor}\label{cor:take dim  decomposition reg}
+\[
+|G| = \sum_{\rho \in \mathrm{Irr}(G)} (\dim \rho)^2, \qquad
+\sum_{\rho \in \mathrm{Irr}(G)} (\dim \rho) \chi_\rho(g) = 0 \quad (g \neq e).
+\]
+\end{cor}
+
+\begin{proof}[Proof sketch]
+Take dimensions and compare characters in \[
+\mathrm{reg} = \bigoplus_{\rho \in \mathrm{Irr}(G)} \rho^{\oplus \dim \rho},
+\]
+\end{proof}
+
+\begin{thm}[Irreducible Characters Form a Basis of Class Functions]
+\label{thm:basis_class_functions}
+
+Let $\mathcal H$ be the space of class functions on \(G\). 
+
+The set \(\{\chi_\rho : \rho \in \operatorname{Irr}(G)\}\) is an orthonormal basis of \(\mathcal H\) with respect to the inner product
+\[
+\langle f, \psi \rangle := \frac{1}{|G|} \sum_{x \in G} f(x) \overline{\psi(x)}.
+\]
+In particular, every class function \(f \in \mathcal H\) can be written uniquely as
+\[
+f = \sum_{\rho \in \operatorname{Irr}(G)} \langle f, \chi_\rho \rangle \, \chi_\rho.
+\]
+\end{thm}
+
+\begin{proof}
+
+\medskip
+\noindent\textbf{Part 1: Orthogonality.}  
+By Theorem \ref{Schur Orthogonality Relations},
+\[
+\langle \chi_\rho, \chi_\sigma \rangle
+= \frac{1}{|G|} \sum_{x \in G} \chi_\rho(x) \overline{\chi_\sigma(x)}
+= \delta_{\rho\sigma},\quad \forall(\rho,\sigma)\in\operatorname{Irr}(G)^2.
+\]
+Hence the irreducible characters form an orthonormal set, so they are linearly independent.
+
+\medskip
+\noindent\textbf{Part 2: Spanning.}  
+We must show that every class function is a linear combination of the irreducible characters. It suffices to show that the only class function orthogonal to all irreducible characters is the zero function.
+
+Let \(f \in \mathcal H\) be a class function such that
+\[
+\langle f, \chi_\rho \rangle = 0, \quad \forall \rho \in \operatorname{Irr}(G). \tag{1}
+\]
+We will prove \(f = 0\).
+
+For any representation \((\rho, V)\) of \(G\), define the linear operator
+\[
+\rho_f := \sum_{x \in G} f(x) \rho_x \in \operatorname{End}(V).
+\]
+For any \(y \in G\),
+\[
+\rho_y \rho_f \rho_y^{-1}
+= \sum_{x \in G} f(x) \rho_{y x y^{-1}}
+= \sum_{z \in G} f(y^{-1} z y) \rho_z
+= \sum_{z \in G} f(z) \rho_z
+= \rho_f,
+\]
+where we used that \(f\) is a class function in the third equality. Thus \(\rho_f\) commutes with every \(\rho_y\).
+
+Now suppose \(\rho\) is irreducible. By Lemma \ref{Schur's Lemma}, \(\rho_f\) is a scalar multiple of the identity: \(\rho_f = \lambda_\rho \cdot \mathrm{id}\). Taking traces,
+\[
+\dim(\rho) \cdot \lambda_\rho
+= \operatorname{Tr}(\rho_f)
+= \sum_{x \in G} f(x) \chi_\rho(x)
+= |G| \langle f, \overline{\chi_\rho} \rangle.
+\]
+Since \(\overline{\chi_\rho}\) is also an irreducible character (the dual of \(\rho\)), condition (1) implies this trace is zero. Hence \(\lambda_\rho = 0\), so \(\rho_f = 0\) for every irreducible representation \(\rho\).
+
+By Theorem\ref{the decomposition of the regular representation}, the regular representation decomposes into a direct sum of irreducibles, and \(\rho_f = 0\) on each irreducible summand, we have \(\operatorname{reg}_f = 0\) on the entire regular representation.
+
+But
+\[
+\operatorname{reg}_f(e_1) = \sum_{x \in G} f(x) \operatorname{reg}_x(e_1) = \sum_{x \in G} f(x) e_x.
+\]
+Since \(\operatorname{reg}_f = 0\), we get
+\[
+\sum_{x \in G} f(x) e_x = 0.
+\]
+The basis elements \(e_x\) are linearly independent, so \(f(x) = 0\) for every \(x \in G\). Therefore \(f = 0\).
+
+Thus every class function orthogonal to all irreducible characters is zero. Since the irreducible characters are orthonormal and span the whole space, they form a basis of \(\mathcal H\).
+\end{proof}
+
+\begin{thm}[The Second Orthogonality Relation]
+\label{thm:second_orth}
+Let \(\operatorname{Cl}(G)\) be the set of conjugacy classes of \(G\). For   \((C, D )\in \operatorname{Cl}(G)^2\), 
+\[
+\sum_{\rho \in \operatorname{Irr}(G)} \chi_\rho(C) \overline{\chi_\rho(D)}
+=
+\frac{|G|}{|C|} \, \delta_{CD}.
+\]
+
+\end{thm}
+\begin{proof}
+Fix a conjugacy class \(C \subseteq G\), and let \(f_C\) be its characteristic function:
+\[
+f_C(x) :=
+\begin{cases}
+1, & x \in C, \\
+0, & x \notin C.
+\end{cases}
+\]
+Since \(f_C\) is a class function, it can be expressed as a linear combination of the irreducible characters. By Theorem \ref{Schur Orthogonality Relations},
+\[
+\langle f_C, \chi_\rho \rangle
+:= \frac{1}{|G|} \sum_{x \in G} f_C(x) \, \overline{\chi_\rho(x)}
+= \frac{|C|}{|G|} \, \overline{\chi_\rho(C)},
+\]
+where \(g_C\) is any chosen element of \(C\). Hence, for every \(x \in G\),
+\[
+f_C(x)
+= \sum_{\rho \in \operatorname{Irr}(G)}
+  \frac{|C|}{|G|} \, \overline{\chi_\rho(C)} \, \chi_\rho(x). \tag{1}
+\]
+
+Now take \(C \) such that $g\in C$. Evaluating (1) at \(x = h\) gives
+\[
+f_{C}(h)
+= \frac{|C|}{|G|}
+  \sum_{\rho \in \operatorname{Irr}(G)}
+  \overline{\chi_\rho(g)} \, \chi_\rho(h).
+\]
+We consider two cases:
+
+\begin{itemize}
+\item If \(h \in C\), then \(f_{C}(h) = 1\). Therefore,
+\[
+\sum_{\rho \in \operatorname{Irr}(G)} \overline{\chi_\rho(g)} \, \chi_\rho(h)
+= \frac{|G|}{|C|}.
+\]
+
+\item If \(h \notin C\), then \(f_{C}(h) = 0\). Therefore,
+\[
+\sum_{\rho \in \operatorname{Irr}(G)} \overline{\chi_\rho(g)} \, \chi_\rho(h)
+= 0.
+\]
+\end{itemize}
+
+Finally, taking the complex conjugate of both sides in each case gives exactly the desired formula:
+\[
+\sum_{\rho \in \operatorname{Irr}(G)} \chi_\rho(g) \, \overline{\chi_\rho(h)}
+=
+\begin{cases}
+\dfrac{|G|}{|C|}, & h \in C, \\[6pt]
+0, & h \notin C.
+\end{cases}
+\]
+This proves the proposition.
+\end{proof}

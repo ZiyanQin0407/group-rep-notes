@@ -1,0 +1,691 @@
+\chapter{Module Theory Preliminaries}
+
+\section{Modules over a Ring}
+
+\begin{defn}[Left Module over a Ring]
+Let $R$ be a unitary ring (with identity $1_R$). Let $(M, +)$ be an abelian group, with neutral element denoted by $0$. A \textbf{left $R$-module structure} on $M$ is a map
+\[
+\phi: R \times M \to M, \quad (r, m) \mapsto r \cdot m
+\]
+such that for all $r, s \in R$ and all $m, n \in M$:
+\begin{enumerate}
+    \item $(r + s) \cdot m = r \cdot m + s \cdot m$,
+    \item $r \cdot (m + n) = r \cdot m + r \cdot n$,
+    \item $(rs) \cdot m = r \cdot (s \cdot m)$,
+    \item $1_R \cdot m = m$.
+\end{enumerate}
+The abelian group $(M, +)$ equipped with such a structure is called a \textbf{left $R$-module}.
+\end{defn}
+
+\begin{defn}[Right Module]
+Similarly, a \textbf{right $R$-module} is an abelian group $(M, +)$ with a map
+\[
+M \times R \to M, \quad (m, r) \mapsto m \cdot r
+\]
+such that for all $r, s \in R$ and $m, n \in M$:
+\begin{enumerate}
+    \item $m \cdot (r + s) = m \cdot r + m \cdot s$,
+    \item $(m + n) \cdot r = m \cdot r + n \cdot r$,
+    \item $m \cdot (rs) = (m \cdot r) \cdot s$,
+    \item $m \cdot 1_R = m$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[Submodule]
+Let $M$ be a left $R$-module. A \textbf{submodule} of $M$ is a nonempty subset $N \subseteq M$ such that:
+\begin{enumerate}
+    \item $N$ is a subgroup of $(M, +)$,
+    \item for all $r \in R$ and all $n \in N$, we have $r \cdot n \in N$.
+\end{enumerate}
+We write $N \le M$ to denote that $N$ is a submodule of $M$.
+\end{defn}
+
+\begin{prop}
+A submodule of a left $R$-module is itself a left $R$-module under the restricted action.
+\end{prop}
+
+\begin{proof}
+Let $N \le M$. The addition and scalar multiplication are inherited from $M$. Since $N$ is closed under addition (being a subgroup) and under the action of $R$, the four module axioms hold in $N$ because they hold in $M$ for all elements, hence in particular for those in $N$.
+\end{proof}
+
+\begin{defn}[Module Homomorphism]
+Let $M, N$ be left $R$-modules. An \textbf{$R$-module homomorphism} (or \textbf{$R$-linear map}) is a map $f: M \to N$ such that:
+\begin{enumerate}
+    \item $f(m_1 + m_2) = f(m_1) + f(m_2)$ for all $m_1, m_2 \in M$,
+    \item $f(r \cdot m) = r \cdot f(m)$ for all $r \in R$, $m \in M$.
+\end{enumerate}
+The set of all $R$-module homomorphisms from $M$ to $N$ is denoted by $\operatorname{Hom}_R(M, N)$.
+\end{defn}
+
+\begin{prop}
+$\operatorname{Hom}_R(M, N)$ is an abelian group under pointwise addition:
+\[
+(f + g)(m) = f(m) + g(m).
+\]
+If $R$ is commutative, $\operatorname{Hom}_R(M, N)$ is an $R$-module.
+\end{prop}
+
+\begin{proof}
+For pointwise addition, the zero map is the neutral element, and the negative of $f$ is $(-f)(m) = -f(m)$. Closure holds because:
+\[
+(f+g)(m_1+m_2) = f(m_1)+f(m_2)+g(m_1)+g(m_2) = (f+g)(m_1) + (f+g)(m_2),
+\]
+and
+\[
+(f+g)(r \cdot m) = f(r \cdot m) + g(r \cdot m) = r \cdot f(m) + r \cdot g(m) = r \cdot (f+g)(m).
+\]
+If $R$ is commutative, define $(r \cdot f)(m) = r \cdot f(m)$; the module axioms follow from commutativity.
+\end{proof}
+
+\begin{defn}[Kernel and Image]
+For an $R$-module homomorphism $f: M \to N$, define:
+\[
+\ker f = \{ m \in M : f(m) = 0_N \}, \qquad \operatorname{im} f = \{ f(m) : m \in M \}.
+\]
+\end{defn}
+
+\begin{prop}
+$\ker f$ is a submodule of $M$, and $\operatorname{im} f$ is a submodule of $N$.
+\end{prop}
+
+\begin{proof}
+For $\ker f$: it is a subgroup of $(M, +)$ since $f$ is a group homomorphism. If $m \in \ker f$ and $r \in R$, then $f(r \cdot m) = r \cdot f(m) = r \cdot 0 = 0$, so $r \cdot m \in \ker f$.
+
+For $\operatorname{im} f$: if $n_1, n_2 \in \operatorname{im} f$, say $n_i = f(m_i)$, then $n_1 + n_2 = f(m_1 + m_2) \in \operatorname{im} f$. If $r \in R$, then $r \cdot n_1 = r \cdot f(m_1) = f(r \cdot m_1) \in \operatorname{im} f$.
+\end{proof}
+
+\begin{defn}[Quotient Module]
+Let $M$ be a left $R$-module and $N \le M$. Since $N$ is a subgroup of the abelian group $(M, +)$, the quotient group $M/N = \{ m + N : m \in M \}$ is well-defined. Define an action of $R$ on $M/N$ by
+\[
+r \cdot (m + N) = (r \cdot m) + N.
+\]
+This is well-defined: if $m + N = m' + N$, then $m - m' \in N$, so $r \cdot (m - m') \in N$, hence $r \cdot m + N = r \cdot m' + N$. With this action, $M/N$ becomes a left $R$-module, called the \textbf{quotient module}.
+\end{defn}
+
+\begin{thm}[First Isomorphism Theorem for Modules]
+Let $f: M \to N$ be an $R$-module homomorphism. Then
+\[
+M / \ker f \cong \operatorname{im} f
+\]
+as $R$-modules.
+\end{thm}
+
+\begin{proof}
+Define $\overline{f}: M/\ker f \to \operatorname{im} f$ by $\overline{f}(m + \ker f) = f(m)$. This is well-defined: if $m + \ker f = m' + \ker f$, then $m - m' \in \ker f$, so $f(m) = f(m')$. It is a group homomorphism because $f$ is. It is $R$-linear:
+\[
+\overline{f}(r \cdot (m + \ker f)) = \overline{f}(r \cdot m + \ker f) = f(r \cdot m) = r \cdot f(m) = r \cdot \overline{f}(m + \ker f).
+\]
+It is surjective onto $\operatorname{im} f$ by definition, and injective because $\overline{f}(m + \ker f) = 0$ implies $f(m) = 0$, so $m \in \ker f$, hence $m + \ker f = 0 + \ker f$. Thus $\overline{f}$ is an isomorphism.
+\end{proof}
+
+\section{Simple Modules and Schur's Lemma}
+
+\begin{defn}[Simple Module]
+A nonzero left $R$-module $M$ is \textbf{simple} (or \textbf{irreducible}) if its only submodules are $0$ and $M$ itself.
+\end{defn}
+
+\begin{lemma}[Schur's Lemma]
+Let $M, N$ be simple left $R$-modules.
+\begin{enumerate}
+    \item If $M \not\cong N$, then $\operatorname{Hom}_R(M, N) = 0$.
+    \item $\operatorname{Hom}_R(M, M)$ is a division ring.
+    \item If $R$ is a $k$-algebra over an algebraically closed field $k$ and $M$ is finite-dimensional over $k$, then $\operatorname{Hom}_R(M, M) \cong k$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{Part 1:} Let $f \in \operatorname{Hom}_R(M, N)$ be nonzero. Then $\ker f$ is a submodule of $M$. Since $f \neq 0$, $\ker f \neq M$. Since $M$ is simple, $\ker f = 0$. Similarly, $\operatorname{im} f$ is a nonzero submodule of $N$; by simplicity of $N$, $\operatorname{im} f = N$. Hence $f$ is an isomorphism, contradicting $M \not\cong N$. Therefore the only homomorphism is the zero map.
+
+\textbf{Part 2:} Let $f \in \operatorname{Hom}_R(M, M)$ be nonzero. As above, $f$ is an isomorphism. Hence $f$ has an inverse $f^{-1}$, which is also $R$-linear. Thus every nonzero element of $\operatorname{Hom}_R(M, M)$ is invertible, so it is a division ring.
+
+\textbf{Part 3:} If \(k\) is algebraically closed and \(M\) is finite-dimensional over \(k\), then \(\operatorname{Hom}_R(M, M)\) is a finite-dimensional division algebra over \(k\). Since \(k\) is algebraically closed, every finite-dimensional division algebra over \(k\) is isomorphic to \(k\) itself. Hence \(\operatorname{Hom}_R(M, M) \cong k\).
+\end{proof}
+
+\section{Composition Series and the Jordan-Hölder Theorem}
+
+\begin{defn}[Composition Series]
+Let $M$ be an $R$-module. A \textbf{composition series} of $M$ is a finite chain of submodules
+\[
+0 = M_0 \subset M_1 \subset M_2 \subset \cdots \subset M_n = M
+\]
+such that each quotient $M_i/M_{i-1}$ is simple for $1 \le i \le n$. The simple quotients $M_i/M_{i-1}$ are called the \textbf{composition factors} of the series.
+\end{defn}
+
+\begin{defn}[Finite Length]
+An $R$-module $M$ is said to have \textbf{finite length} if it admits a composition series. The integer $n$ is called the \textbf{length} of $M$.
+\end{defn}
+
+\begin{thm}[Jordan-Hölder Theorem]
+Let $M$ be an $R$-module of finite length. Any two composition series of $M$ have the same multiset of composition factors (up to isomorphism and order).
+\end{thm}
+
+\begin{proof}
+We prove this by induction on the length $n$ of $M$.
+
+For $n = 0$, $M = 0$, trivial. For $n = 1$, $M$ is simple, so the only composition series is $0 \subset M$.
+
+Assume the theorem holds for all modules of length $< n$. Let
+\[
+0 = M_0 \subset M_1 \subset \cdots \subset M_n = M
+\]
+and
+\[
+0 = N_0 \subset N_1 \subset \cdots \subset N_m = M
+\]
+be two composition series. We have $m = n$ (this will follow from the argument below).
+
+If $M_{n-1} = N_{m-1}$, then by the induction hypothesis applied to this common submodule, the two series have the same composition factors up to that point, and both have $M/M_{n-1}$ as the final factor. So the multisets are equal.
+
+If $M_{n-1} \neq N_{m-1}$, consider the submodule $L = M_{n-1} + N_{m-1} \subseteq M$. Since both $M_{n-1}$ and $N_{m-1}$ are maximal submodules of $M$ (as they appear just before $M$ in a composition series), we have $L = M$. Now consider the canonical map
+\[
+M_{n-1} \to M / N_{m-1}, \quad m \mapsto m + N_{m-1}.
+\]
+The kernel of this map is $M_{n-1} \cap N_{m-1}$. Since $M/N_{m-1}$ is simple, the image is either $0$ or all of $M/N_{m-1}$. The image cannot be $0$ because then $M_{n-1} \subseteq N_{m-1}$, contradicting $M_{n-1} \neq N_{m-1}$ and maximality. Hence the image is all of $M/N_{m-1}$, so by the First Isomorphism Theorem,
+\[
+M_{n-1} / (M_{n-1} \cap N_{m-1}) \cong M / N_{m-1}.
+\]
+Similarly,
+\[
+N_{m-1} / (M_{n-1} \cap N_{m-1}) \cong M / M_{n-1}.
+\]
+Thus the two composition factors $M/M_{n-1}$ and $M/N_{m-1}$ are isomorphic to the two quotients above.
+
+Now let $K = M_{n-1} \cap N_{m-1}$. Choose a composition series for $K$. Then:
+\begin{itemize}
+    \item $0 \subset \cdots \subset K \subset M_{n-1} \subset M$ is a composition series for $M$ whose factors are those of $K$, plus $M_{n-1}/K \cong M/N_{m-1}$, plus $M/M_{n-1}$.
+    \item $0 \subset \cdots \subset K \subset N_{m-1} \subset M$ is another composition series for $M$ whose factors are those of $K$, plus $N_{m-1}/K \cong M/M_{n-1}$, plus $M/N_{m-1}$.
+\end{itemize}
+By the induction hypothesis applied to $M_{n-1}$ and $N_{m-1}$, the multisets of composition factors of these two series agree. Hence the original two series have the same multiset of composition factors. This completes the proof.
+\end{proof}
+
+\begin{cor}
+The multiplicity of a given simple module $S$ as a composition factor of $M$ is well-defined, independent of the choice of composition series.
+\end{cor}
+
+\begin{proof}[Proof sketch]
+Immediate from the Jordan-Hölder theorem.
+\end{proof}
+
+\section{Direct Sums and Indecomposable Modules}
+
+\begin{defn}[Direct Sum]
+Let $\{M_i\}_{i \in I}$ be a family of $R$-modules. Their \textbf{direct sum} is
+\[
+\bigoplus_{i \in I} M_i = \left\{ (m_i)_{i \in I} : m_i \in M_i \text{ and } m_i = 0 \text{ for all but finitely many } i \right\},
+\]
+with componentwise addition and $R$-action: $r \cdot (m_i) = (r \cdot m_i)$.
+\end{defn}
+
+\begin{defn}[Indecomposable Module]
+A nonzero $R$-module $M$ is \textbf{indecomposable} if it cannot be written as $M = M_1 \oplus M_2$ with both $M_1$ and $M_2$ nonzero.
+\end{defn}
+
+\begin{remark}
+In semisimple modules, indecomposable is equivalent to simple. In general module categories, indecomposable modules may have nontrivial composition series.
+\end{remark}
+
+\begin{defn}[Local Ring]
+A ring $R$ is \textbf{local} if it has a unique maximal left (equivalently, right) ideal.
+\end{defn}
+
+\begin{lemma}
+For an indecomposable module $M$ of finite length over a finite-dimensional algebra $A$, the endomorphism ring $\operatorname{End}_A(M)$ is local.
+\end{lemma}
+
+\begin{proof}[Sketch]
+Let $f \in \operatorname{End}_A(M)$. If $f$ is not an isomorphism, then either $\ker f \neq 0$ or $\operatorname{im} f \neq M$. One shows that the non-isomorphisms form a two-sided ideal (the Jacobson radical of $\operatorname{End}_A(M)$), and the quotient by this ideal is a division ring. Hence the endomorphism ring is local. This is a standard result in module theory.
+\end{proof}
+
+\begin{thm}[Krull-Schmidt Theorem]
+Let $M$ be an $R$-module of finite length. Then $M$ can be written as a finite direct sum
+\[
+M = M_1 \oplus M_2 \oplus \cdots \oplus M_t
+\]
+where each $M_i$ is indecomposable. Moreover, this decomposition is unique up to isomorphism and permutation of the summands.
+\end{thm}
+
+\begin{proof}
+\textbf{Existence:} Induct on the length of $M$. If $M = 0$, trivial. If $M$ is indecomposable, done. Otherwise $M = M' \oplus M''$ with both nonzero; each has length strictly smaller than that of $M$. By induction, both decompose into indecomposables, yielding a decomposition of $M$.
+\textbf{Uniqueness:} Suppose
+\[
+M=M_1\oplus\cdots\oplus M_t=N_1\oplus\cdots\oplus N_s
+\]
+with all \(M_i,N_j\) indecomposable. Let \(\pi_i:M\to M_i\) and \(\iota_i:M_i\to M\) be the projections and inclusions. For fixed \(M_1\), consider
+\[
+\alpha_j=\pi_1\circ \iota_j:N_j\to M_1, \qquad \beta_j=\pi_j\circ \iota_1:M_1\to N_j.
+\]
+Then
+\[
+\sum_{j=1}^s \alpha_j \circ \beta_j = \mathrm{id}_{M_1}.
+\]
+Since \(\operatorname{End}_R(M_1)\) is local, at least one \(\alpha_j \circ \beta_j\) is a unit. Hence \(\alpha_j\) is surjective and \(\beta_j\) is injective. Since \(M_1\) and \(N_j\) have the same finite length, \(\alpha_j\) is an isomorphism. Thus \(M_1\cong N_j\). Cancel this pair of summands and apply induction to the remaining direct sum. This proves uniqueness.
+\end{proof}
+
+\section{Projective Modules}
+
+\begin{defn}[Projective Module]
+An \(R\)-module \(P\) is \textbf{projective} if for every diagram of \(R\)-modules
+\[
+\begin{tikzcd}
+    & P \arrow[d, "f"] \arrow[ld, dashed, "h"] & \\
+    A \arrow[r, "g"] & B \arrow[r] & 0
+\end{tikzcd}
+\]
+with \(g\) surjective, there exists an \(R\)-module homomorphism \(h: P \to A\) such that \(g \circ h = f\).
+\end{defn}
+
+\begin{prop}
+A module $P$ is projective if and only if it is a direct summand of a free module.
+\end{prop}
+
+
+\begin{proof}
+($\Leftarrow$) Let \(F\) be free with basis \(\{e_i\}_{i\in I}\). Given \(f:F\to B\) and a surjection \(g:A\to B\), choose \(a_i\in A\) with \(g(a_i)=f(e_i)\). Define \(h:F\to A\) by \(h(e_i)=a_i\) and extend \(R\)-linearly. Then \(g\circ h=f\).
+
+If \(P\) is a direct summand of a free module \(F=P\oplus Q\), extend \(f:P\to B\) to \(\tilde f:F\to B\) by setting \(\tilde f(q)=0\) for \(q\in Q\). Lift \(\tilde f\) to \(\tilde h:F\to A\), and restrict to \(P\). Thus \(P\) is projective.
+
+($\Rightarrow$) Let \(P\) be projective. Choose a free module \(F\) and a surjection \(g:F\to P\). Applying the projective property to \(\mathrm{id}_P:P\to P\), we get \(h:P\to F\) such that
+\[
+g\circ h=\mathrm{id}_P.
+\]
+Hence \(P\) is a direct summand of \(F\).
+\end{proof}
+
+
+\begin{defn}[Projective Cover]
+Let $M$ be an $R$-module. A \textbf{projective cover} of $M$ is a projective module $P$ together with a surjective homomorphism $f: P \to M$ such that for every submodule $K \subseteq P$ with $f(K) = M$, we have $K = P$. Such a map $f$ is called an \textbf{essential epimorphism}.
+\end{defn}
+
+\begin{prop}
+Let $f: P \to M$ be a projective cover. Then $P$ is indecomposable if and only if $M$ is indecomposable.
+\end{prop}
+\begin{proof}
+\((\Rightarrow)\) Suppose \( M = M_1 \oplus M_2 \) with \( M_1, M_2 \neq 0 \).  
+Let \( P_i \) be projective covers of \( M_i \), so \( f_i : P_i \to M_i \) is epic and \(\ker f_i \subseteq \operatorname{rad} P_i\).  
+Then \( P_1 \oplus P_2 \) is projective and \( f_1 \oplus f_2 : P_1 \oplus P_2 \to M \) is a projective cover (since \(\ker(f_1 \oplus f_2) = \ker f_1 \oplus \ker f_2 \subseteq \operatorname{rad}(P_1 \oplus P_2)\)).  
+By uniqueness of projective covers (up to isomorphism), \( P \cong P_1 \oplus P_2 \), contradicting indecomposability of \( P \).
+
+\((\Leftarrow)\) Assume \( P = P_1 \oplus P_2 \) with \( P_1, P_2 \neq 0 \). Since \( f : P \to M \) is a projective cover, it induces an isomorphism \( P/\operatorname{rad}P \cong M/\operatorname{rad}M \). 
+Now, \( P = P_1 \oplus P_2 \) implies 
+\[
+P/\operatorname{rad}P \cong P_1/\operatorname{rad}P_1 \oplus P_2/\operatorname{rad}P_2.
+\]
+Since \( P_1, P_2 \neq 0 \), their tops \( P_1/\operatorname{rad}P_1 \) and \( P_2/\operatorname{rad}P_2 \) are nonzero. Thus \( P/\operatorname{rad}P \) decomposes into a direct sum of two nonzero modules. Consequently, \( M/\operatorname{rad}M \cong P/\operatorname{rad}P \) also decomposes as a direct sum of two nonzero modules. Therefore, \( M \) must be decomposable.
+\end{proof}
+
+\begin{prop}
+For finite-dimensional algebras over fields, every module has a projective cover, unique up to isomorphism.
+\end{prop}
+\begin{proof}
+Let \( A \) be a finite-dimensional algebra over a field \( k \), and let \( M \) be a finite-dimensional \( A \)-module.  
+Since \( A \) is finite-dimensional, every finite-dimensional \( A \)-module is a quotient of a finitely generated free \( A \)-module. Among all projective modules \( P \) admitting an epimorphism \( f:P\to M \), choose one with the minimal number of indecomposable direct summands. Such a \( P \) exists because the category of finite-dimensional modules is Krull--Schmidt.
+
+To show \(\ker f\subseteq \operatorname{rad} P\), suppose not. Then there exists a maximal submodule \(N\subset P\) such that \(\ker f\not\subseteq N\). Hence \(P=N+\ker f\), so \(f(N)=M\). Since \(P\) is a finite direct sum of indecomposable projective modules, \(P/\operatorname{rad}P\) is semisimple. The image of \(\ker f\) in \(P/\operatorname{rad}P\) is nonzero, so it has a nonzero direct summand complement. Lifting this complement gives a proper direct summand \(Q\) of \(P\) such that \(P=Q+\ker f\). Then \(f(Q)=M\), contradicting the minimality of \(P\).Therefore \( \ker f \subseteq \operatorname{rad} P \), so \( f \) is a projective cover.
+
+For uniqueness, suppose \( f_1 : P_1 \to M \) and \( f_2 : P_2 \to M \) are two projective covers. Since \( P_1 \) is projective and \( f_2 \) is epic, there exists \( g : P_1 \to P_2 \) with \( f_2 g = f_1 \).  
+We claim that \(g\) must be an isomorphism. Indeed, since \(P_2\) is projective and \(f_1\) is epic, there exists \(h:P_2\to P_1\) with \(f_1h=f_2\). Then
+\[
+f_2(gh-\mathrm{id}_{P_2})=f_1h-f_2=0,
+\]
+so \(\operatorname{im}(gh-\mathrm{id}_{P_2})\subseteq \ker f_2\subseteq \operatorname{rad}P_2\). Hence \(gh\) is an isomorphism. Similarly, \(hg\) is an isomorphism. Therefore \(g\) is an isomorphism, so \(P_1\cong P_2\).
+\end{proof}
+
+\begin{defn}[Radical]
+The \textbf{radical} \(\operatorname{Rad}(M)\) of an \(R\)-module \(M\) is the intersection of all maximal submodules of \(M\).
+
+For modules of finite length (e.g., finite-dimensional modules over a finite-dimensional algebra), one also has that \(M/\operatorname{Rad}(M)\) is semisimple. In general, the statement that \(\operatorname{Rad}(M)\) is the smallest submodule with semisimple quotient is not valid.
+\end{defn}
+
+\begin{defn}[Socle]
+The \textbf{socle} $\operatorname{Soc}(M)$ of an $R$-module $M$ is the sum of all simple submodules of $M$. Equivalently, it is the largest semisimple submodule of $M$.
+\end{defn}
+
+\begin{prop}
+Assume \(k\) is algebraically closed, \(A\) is a finite-dimensional \(k\)-algebra, \(P\) is a finitely generated projective \(A\)-module, and \(S\) is a finite-dimensional simple \(A\)-module. Then
+\[
+\dim_k \operatorname{Hom}_A(P,S)
+=
+[P/\operatorname{rad}P:S].
+\]
+In particular, for the projective cover \(P_S\) of \(S\), we have
+\[
+\operatorname{Hom}_A(P_S,S)\cong k.
+\]
+\end{prop}
+\begin{proof}
+Since \(P\) is projective, it is a direct summand of a free module \(A^{(I)}\). By additivity, it suffices to prove for \(P = A\). For \(P = A\), we have
+\[
+\operatorname{Hom}_A(A,S)\cong S,
+\]
+and \(\dim_k S\) equals the multiplicity of \(S\) in the top of \(A\), which is the same as its multiplicity in the top of any free \(A\)-module.
+
+For the general case, write \(P\cong \bigoplus_i P_i\) with each \(P_i\) indecomposable projective. Each \(P_i\) has a unique simple top \(S_i\). Then
+\[
+\operatorname{Hom}_A(P_i,S)=0 \quad \text{if } S_i\not\cong S,
+\]
+and
+\[
+\operatorname{Hom}_A(P_i,S_i)\cong k \quad \text{if } S_i\cong S.
+\]
+This equals the multiplicity of \(S\) in the top of \(P_i\).
+
+For \(P_S\), the projective cover of \(S\), its top is \(S\), so
+\[
+\operatorname{Hom}_A(P_S,S)
+\cong
+\operatorname{Hom}_A(P_S,P_S/\operatorname{rad}P_S)
+\cong
+\operatorname{Hom}_A(P_S,S)
+\]
+is one-dimensional over \(\operatorname{End}_A(S)\cong k\).
+\end{proof}
+
+\section{Tensor Products of Modules}
+
+\begin{defn}
+Let $R$  be a unitary ring, and let \(A\) be a right \(R\)-module and \(B\) a left \(R\)-module. The \textbf{tensor product} \(A \otimes_R B\) is an abelian group generated by symbols \(a \otimes b\) (for \(a \in A\), \(b \in B\)) subject to the relations:
+\[
+\begin{array}{rcl}
+(a_1 + a_2) \otimes b &=& a_1 \otimes b + a_2 \otimes b,\\
+a \otimes (b_1 + b_2) &=& a \otimes b_1 + a \otimes b_2,\\
+(a r) \otimes b &=& a \otimes (r b), \qquad r \in R.
+\end{array}
+\]
+\end{defn}
+
+\begin{remark}
+If \(R = K\) is a field, then \(A \otimes_K B\) is a vector space over \(K\), and this definition reduces to the usual tensor product of vector spaces.
+\end{remark}
+
+
+
+\begin{thm}[Universal Property of Tensor Products]
+Let \(A\) be a right \(R\)-module and \(B\) a left \(R\)-module. For any abelian group \(C\) and any biadditive map
+\[
+f: A \times B \to C, \qquad f(a_1 + a_2, b) = f(a_1,b) + f(a_2,b), \quad f(a, b_1 + b_2) = f(a,b_1) + f(a,b_2), \quad f(ar, b) = f(a, rb),
+\]
+there exists a unique group homomorphism \(\tilde{f}: A \otimes_R B \to C\) such that \(\tilde{f}(a \otimes b) = f(a,b)\) for all \(a \in A\), \(b \in B\).
+\end{thm}
+
+\begin{proof}
+The proof is standard: the map \(f\) factors through the free abelian group generated by \(A \times B\), and the relations defining \(A \otimes_R B\) are exactly those that make \(f\) well-defined.
+\end{proof}
+
+
+
+\begin{prop}\label{prop:tensor_basic}
+Let \(R\) be a ring.
+\begin{enumerate}
+    \item \(R \otimes_R M \cong M\) for any left \(R\)-module \(M\).
+    \item \(M \otimes_R R \cong M\) for any right \(R\)-module \(M\).
+    \item \((A \oplus A') \otimes_R B \cong (A \otimes_R B) \oplus (A' \otimes_R B)\).
+    \item \(A \otimes_R (B \oplus B') \cong (A \otimes_R B) \oplus (A \otimes_R B')\).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+(1) The maps \(m \mapsto 1 \otimes m\) and \(r \otimes m \mapsto rm\) are inverse isomorphisms. The proof of (2) is analogous. Properties (3) and (4) follow from the universal property.
+\end{proof}
+
+
+
+
+\begin{thm}[Associativity of Tensor Products]
+Let \(A\) be a right \(R\)-module, \(B\) an \((R,S)\)-bimodule, and \(C\) a left \(S\)-module. Then there is a natural isomorphism
+\[
+(A \otimes_R B) \otimes_S C \cong A \otimes_R (B \otimes_S C).
+\]
+\end{thm}
+
+\begin{proof}
+Define \(\alpha: (A \otimes_R B) \times C \to A \otimes_R (B \otimes_S C)\) by \((a \otimes b, c) \mapsto a \otimes (b \otimes c)\). This is well-defined and biadditive, so it induces \(\alpha: (A \otimes_R B) \otimes_S C \to A \otimes_R (B \otimes_S C)\). Similarly, define \(\beta: A \times (B \otimes_S C) \to (A \otimes_R B) \otimes_S C\) by \((a, b \otimes c) \mapsto (a \otimes b) \otimes c\). These maps are inverse.
+\end{proof}
+
+
+
+\begin{thm}[Hom-tensor Adjunction]
+Let \(R, S\) be rings, \(A\) an \((R,S)\)-bimodule, \(B\) a left \(S\)-module, and \(C\) a left \(R\)-module. Then there is a natural isomorphism of abelian groups:
+\[
+\operatorname{Hom}_R(A \otimes_S B, C) \cong \operatorname{Hom}_S(B, \operatorname{Hom}_R(A, C)).
+\]
+\end{thm}
+
+\begin{proof}
+Given \(f: A \otimes_S B \to C\), define \(\phi_f: B \to \operatorname{Hom}_R(A, C)\) by \(\phi_f(b)(a) = f(a \otimes b)\). Conversely, given \(\phi: B \to \operatorname{Hom}_R(A, C)\), define \(f_\phi(a \otimes b) = \phi(b)(a)\). These constructions are inverse.
+\end{proof}
+
+
+
+\begin{defn}
+Let \(K \subseteq L\) be fields (or more generally, let \(R \to S\) be a ring homomorphism). If \(M\) is an \(R\)-module, the \textbf{scalar extension} of \(M\) to \(S\) is
+\[
+M_S := S \otimes_R M.
+\]
+This is an \(S\)-module via \(s \cdot (s' \otimes m) = (ss') \otimes m\).
+\end{defn}
+
+\begin{remark}
+If \(M\) is an \(R[G]\)-module, then \(M_S\) is an \(S[G]\)-module with the natural action \(g \cdot (s \otimes m) = s \otimes (g m)\).
+\end{remark}
+
+\begin{prop}\label{prop:scalar_extension}
+Assume \(M, N\) are \((R, S)\)-bimodules, or assume \(R, S\) are commutative rings, so that all tensor products below are defined. Scalar extension commutes with direct sums and tensor products:
+\[
+(M \oplus N)_S \cong M_S \oplus N_S, \qquad (M \otimes_R N)_S \cong M_S \otimes_S N_S.
+\]\end{prop}
+
+\begin{proof}
+The first follows from Proposition \ref{prop:tensor_basic}(3). The second follows from associativity:
+\[
+S \otimes_R (M \otimes_R N) \cong (S \otimes_R M) \otimes_S (S \otimes_R N).
+\]
+\end{proof}
+\section{Category and Functor}
+
+
+\subsection*{Notational Conventions}
+
+We shall use the following notations:
+\begin{itemize}
+    \item We write $\operatorname{Ob}(\mathcal{C})$ for the class of objects of a category $\mathcal{C}$.
+    \item For objects $A, B \in \operatorname{Ob}(\mathcal{C})$, we write $\operatorname{Hom}_{\mathcal{C}}(A, B)$ for the set of morphisms from $A$ to $B$ (whenever this is a set; categories with this property are called \emph{locally small}).
+    \item We denote the category of sets by $\mathsf{Set}$, the category of abelian groups by $\mathsf{Ab}$, and the category of left modules over a ring $R$ by $R\text{-}\mathsf{Mod}$.
+    \item All functors are assumed to be covariant unless explicitly stated to be contravariant.
+\end{itemize}
+
+\subsection{Categories}
+
+\begin{defn}
+A category $\mathcal{C}$ consists of:
+\begin{enumerate}
+    \item A class $\operatorname{Ob}(\mathcal{C})$, whose elements are called \emph{objects};
+    \item For every pair $A, B \in \operatorname{Ob}(\mathcal{C})$, a set $\operatorname{Hom}_{\mathcal{C}}(A, B)$ whose elements are called \emph{morphisms} (or arrows) from $A$ to $B$;
+    \item For every triple $A, B, C \in \operatorname{Ob}(\mathcal{C})$, a composition law
+    \[
+    \circ: \operatorname{Hom}_{\mathcal{C}}(B, C) \times \operatorname{Hom}_{\mathcal{C}}(A, B) \longrightarrow \operatorname{Hom}_{\mathcal{C}}(A, C),
+    \]
+    usually written as $(g, f) \mapsto g \circ f$;
+    \item For every object $A \in \operatorname{Ob}(\mathcal{C})$, an identity morphism $\operatorname{id}_A \in \operatorname{Hom}_{\mathcal{C}}(A, A)$.
+\end{enumerate}
+These data are subject to the following axioms:
+\begin{itemize}
+    \item \textbf{Associativity:} For morphisms $f: A \to B$, $g: B \to C$, and $h: C \to D$, we have $h \circ (g \circ f) = (h \circ g) \circ f$.
+    \item \textbf{Identity:} For any morphism $f: A \to B$, we have $\operatorname{id}_B \circ f = f$ and $f \circ \operatorname{id}_A = f$.
+\end{itemize}
+\end{defn}
+
+\begin{defn}
+Let $\mathcal{C}$ and $\mathcal{D}$ be categories. A (covariant) functor $F: \mathcal{C} \to \mathcal{D}$ consists of:
+\begin{enumerate}
+    \item A mapping $F: \operatorname{Ob}(\mathcal{C}) \to \operatorname{Ob}(\mathcal{D})$;
+    \item For each pair $A, B \in \operatorname{Ob}(\mathcal{C})$, a mapping
+    \[
+    F_{A,B}: \operatorname{Hom}_{\mathcal{C}}(A, B) \longrightarrow \operatorname{Hom}_{\mathcal{D}}(F(A), F(B)),
+    \]
+    usually written simply as $f \mapsto F(f)$.
+\end{enumerate}
+These mappings must preserve identities and compositions:
+\[
+F(\operatorname{id}_A) = \operatorname{id}_{F(A)}, \qquad F(g \circ f) = F(g) \circ F(f).
+\]
+
+A \emph{contravariant} functor from $\mathcal{C}$ to $\mathcal{D}$ is a covariant functor from the opposite category $\mathcal{C}^{\mathrm{op}}$ to $\mathcal{D}$. Equivalently, it reverses arrows: $F(g \circ f) = F(f) \circ F(g)$ for composable $f, g$.
+\end{defn}
+
+\begin{remark}
+For a locally small category $\mathcal{C}$ and any fixed object $A$, the assignments $B \mapsto \operatorname{Hom}_{\mathcal{C}}(A, B)$ and $B \mapsto \operatorname{Hom}_{\mathcal{C}}(B, A)$ will give rise to functors from $\mathcal{C}$ to $\mathsf{Set}$ (one covariant, one contravariant), provided we define their action on morphisms appropriately. This is the subject of the next subsection.
+\end{remark}
+
+\section{The Hom Functor}
+
+Let $\mathcal{C}$ be a locally small category. We define two fundamental functors associated to any object.
+
+\subsection{The Covariant Hom Functor}
+
+Fix an object $A \in \operatorname{Ob}(\mathcal{C})$. We define the covariant Hom functor
+\[
+\operatorname{Hom}_{\mathcal{C}}(A, -): \mathcal{C} \longrightarrow \mathsf{Set}
+\]
+as follows:
+\begin{itemize}
+    \item \textbf{On objects:} For each $B \in \operatorname{Ob}(\mathcal{C})$, 
+    \[
+    \operatorname{Hom}_{\mathcal{C}}(A, -)(B) := \operatorname{Hom}_{\mathcal{C}}(A, B).
+    \]
+    \item \textbf{On morphisms:} For each morphism $g: B \to B'$ in $\mathcal{C}$, the induced map is
+    \[
+    \operatorname{Hom}_{\mathcal{C}}(A, g): \operatorname{Hom}_{\mathcal{C}}(A, B) \longrightarrow \operatorname{Hom}_{\mathcal{C}}(A, B'), \qquad f \longmapsto g \circ f.
+    \]
+    This is called \emph{post-composition} with $g$.
+\end{itemize}
+
+\begin{prop}
+The assignments above define a functor $\operatorname{Hom}_{\mathcal{C}}(A, -): \mathcal{C} \to \mathsf{Set}$.
+\end{prop}
+
+\begin{proof}
+We verify the functoriality axioms. For any object $B \in \operatorname{Ob}(\mathcal{C})$,
+\[
+\operatorname{Hom}_{\mathcal{C}}(A, \operatorname{id}_B)(f) = \operatorname{id}_B \circ f = f
+\]
+for all $f \in \operatorname{Hom}_{\mathcal{C}}(A, B)$, hence
+\[
+\operatorname{Hom}_{\mathcal{C}}(A, \operatorname{id}_B) = \operatorname{id}_{\operatorname{Hom}_{\mathcal{C}}(A, B)}.
+\]
+For composable morphisms $g: B \to B'$ and $h: B' \to B''$, and any $f \in \operatorname{Hom}_{\mathcal{C}}(A, B)$,
+\[
+\operatorname{Hom}_{\mathcal{C}}(A, h \circ g)(f) = (h \circ g) \circ f = h \circ (g \circ f) = \operatorname{Hom}_{\mathcal{C}}(A, h)\big(\operatorname{Hom}_{\mathcal{C}}(A, g)(f)\big).
+\]
+Thus $\operatorname{Hom}_{\mathcal{C}}(A, h \circ g) = \operatorname{Hom}_{\mathcal{C}}(A, h) \circ \operatorname{Hom}_{\mathcal{C}}(A, g)$.
+\end{proof}
+
+\subsection{The Contravariant Hom Functor}
+
+Fix an object $B \in \operatorname{Ob}(\mathcal{C})$. We define the contravariant Hom functor
+\[
+\operatorname{Hom}_{\mathcal{C}}(-, B): \mathcal{C}^{\mathrm{op}} \longrightarrow \mathsf{Set}
+\]
+as follows:
+\begin{itemize}
+    \item \textbf{On objects:} For each $A \in \operatorname{Ob}(\mathcal{C})$, 
+    \[
+    \operatorname{Hom}_{\mathcal{C}}(-, B)(A) := \operatorname{Hom}_{\mathcal{C}}(A, B).
+    \]
+    \item \textbf{On morphisms:} For each morphism $h: A' \to A$ in $\mathcal{C}$ (which is an arrow $h: A \to A'$ in $\mathcal{C}^{\mathrm{op}}$), the induced map is
+    \[
+    \operatorname{Hom}_{\mathcal{C}}(h, B): \operatorname{Hom}_{\mathcal{C}}(A, B) \longrightarrow \operatorname{Hom}_{\mathcal{C}}(A', B), \qquad f \longmapsto f \circ h.
+    \]
+    This is called \emph{pre-composition} with $h$.
+\end{itemize}
+
+\begin{prop}
+The assignments above define a contravariant functor $\operatorname{Hom}_{\mathcal{C}}(-, B): \mathcal{C}^{\mathrm{op}} \to \mathsf{Set}$.
+\end{prop}
+
+\begin{proof}
+For any object $A \in \operatorname{Ob}(\mathcal{C})$ and any $f \in \operatorname{Hom}_{\mathcal{C}}(A, B)$,
+\[
+\operatorname{Hom}_{\mathcal{C}}(\operatorname{id}_A, B)(f) = f \circ \operatorname{id}_A = f,
+\]
+so $\operatorname{Hom}_{\mathcal{C}}(\operatorname{id}_A, B) = \operatorname{id}_{\operatorname{Hom}_{\mathcal{C}}(A, B)}$. For composable morphisms $h: A' \to A$ and $k: A'' \to A'$ in $\mathcal{C}$, and any $f \in \operatorname{Hom}_{\mathcal{C}}(A, B)$,
+\[
+\operatorname{Hom}_{\mathcal{C}}(h \circ k, B)(f) = f \circ (h \circ k) = (f \circ h) \circ k = \operatorname{Hom}_{\mathcal{C}}(k, B)\big(\operatorname{Hom}_{\mathcal{C}}(h, B)(f)\big).
+\]
+Note the reversal of order: $\operatorname{Hom}_{\mathcal{C}}(h \circ k, B) = \operatorname{Hom}_{\mathcal{C}}(k, B) \circ \operatorname{Hom}_{\mathcal{C}}(h, B)$.
+\end{proof}
+
+\subsection{The Bifunctor $\operatorname{Hom}_{\mathcal{C}}(-, -)$}
+
+More generally, the Hom construction is a bifunctor
+\[
+\operatorname{Hom}_{\mathcal{C}}(-, -): \mathcal{C}^{\mathrm{op}} \times \mathcal{C} \longrightarrow \mathsf{Set}.
+\]
+
+For a pair of morphisms $(h: A' \to A, \; g: B \to B')$, the induced map
+\[
+\operatorname{Hom}_{\mathcal{C}}(h, g): \operatorname{Hom}_{\mathcal{C}}(A, B) \longrightarrow \operatorname{Hom}_{\mathcal{C}}(A', B')
+\]
+is given by
+\[
+\operatorname{Hom}_{\mathcal{C}}(h, g)(f) = g \circ f \circ h.
+\]
+
+\begin{prop}
+The above assignments define a bifunctor $\operatorname{Hom}_{\mathcal{C}}(-, -): \mathcal{C}^{\mathrm{op}} \times \mathcal{C} \to \mathsf{Set}$.
+\end{prop}
+
+\begin{proof}
+This follows directly from the associativity of composition in $\mathcal{C}$ and the identity axioms.
+\end{proof}
+
+\begin{remark}
+Bifunctoriality means that for composable pairs of morphisms, the induced maps compose in the expected way. In particular, the covariant and contravariant Hom functors are merely the partial functors obtained by fixing one variable.
+\end{remark}
+
+\subsection{The Case of $R$-Modules}
+
+In representation theory, we are primarily interested in the case where $\mathcal{C} = R\text{-}\mathsf{Mod}$, the category of left modules over a ring $R$ (often a group algebra). In this setting:
+
+\begin{enumerate}
+    \item Each Hom-set $\operatorname{Hom}_R(M, N)$ is not merely a set but an \emph{abelian group} under pointwise addition of $R$-module homomorphisms.
+    \item If $R$ is commutative, $\operatorname{Hom}_R(M, N)$ naturally carries the structure of an $R$-module via $(r \cdot f)(m) = r \cdot f(m)$.
+    \item Consequently, the Hom functor in this context is enriched over $\mathsf{Ab}$ (or over $R\text{-}\mathsf{Mod}$ in the commutative case):
+    \[
+    \operatorname{Hom}_R(-, -): (R\text{-}\mathsf{Mod})^{\mathrm{op}} \times R\text{-}\mathsf{Mod} \longrightarrow \mathsf{Ab}.
+    \]
+\end{enumerate}
+
+\subsection{Two Fundamental Theorems for Reference}
+
+We conclude this appendix by stating two cornerstone results concerning Hom functors, which are used throughout the main text without explicit proof.
+For the proof and further study, see \cite{maclane1978categories}.
+
+\begin{thm}[Yoneda Lemma]
+Let $\mathcal{C}$ be a locally small category, $A \in \operatorname{Ob}(\mathcal{C})$, and $F: \mathcal{C} \to \mathsf{Set}$ an arbitrary functor. Then there is a natural bijection
+\[
+\operatorname{Nat}\big(\operatorname{Hom}_{\mathcal{C}}(A, -), \, F\big) \cong F(A),
+\]
+where $\operatorname{Nat}$ denotes the set of natural transformations. In particular, the Yoneda embedding
+\[
+\mathcal{C} \longrightarrow \mathsf{Fun}(\mathcal{C}, \mathsf{Set}), \qquad A \longmapsto \operatorname{Hom}_{\mathcal{C}}(A, -)
+\]
+is fully faithful. Hence, an object is determined up to isomorphism by its covariant Hom functor.
+\end{thm}
+
+\begin{thm}[Tensor-Hom Adjunction]
+Let $R$ be a commutative ring. For $R$-modules $M, N, K$, there is a natural isomorphism of $R$-modules:
+\[
+\operatorname{Hom}_R(M \otimes_R N, \, K) \cong \operatorname{Hom}_R\big(M, \, \operatorname{Hom}_R(N, K)\big).
+\]
+This adjunction is essential for defining dual representations and induced representations.
+\end{thm}
+\begin{cor}[Double Dual for Finitely Generated Projective Modules]
+Let $R$ be a commutative ring and $P$ a finitely generated projective $R$-module. Then the natural map
+\[
+P \to\operatorname{Hom}_R(\operatorname{Hom}_R(P, R), R), \qquad p \mapsto (\varphi \mapsto \varphi(p))
+\]
+is an isomorphism. 
+\end{cor}
+\begin{remark}
+The Yoneda lemma and the tensor-Hom adjunction are the categorical backbone of representation theory. The former justifies the philosophy of studying representations via their intertwining spaces (Hom-spaces), while the latter provides the mechanism for passing between different formulations of induction and restriction.
+\end{remark}
